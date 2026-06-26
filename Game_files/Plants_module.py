@@ -22,7 +22,7 @@ class Plant:
 
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 6, 0, 50, "sunflower.png") 
+        super().__init__(screen, row, column, 6, 0, 50, "assets/sunflower.png") 
        
 
    
@@ -30,29 +30,29 @@ class Sunflower(Plant):
 
 class Peashooter(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 6, 0, 100, "peashooter.png")
+        super().__init__(screen, row, column, 6, 0, 100, "assets/peashooter.png")
 
 class Gatling(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 6, 0, 200, "gatling_pea.png")
+        super().__init__(screen, row, column, 6, 0, 200, "assets/gatling_pea.png")
 
 class Wallnut(Plant): 
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 32, 0, 50, "walnut.png")
+        super().__init__(screen, row, column, 32, 0, 50, "assets/walnut.png")
         
 
 class Cherrybomb(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, None, 0, 150, "cherrybomb.png")
+        super().__init__(screen, row, column, None, 0, 150, "assets/cherrybomb.png")
 
 def main():
     pygame.init()
 
     pygame.display.set_caption("plants_module")
     screen = pygame.display.set_mode((1000, 650))
-    sunny_mike = Sunflower(screen, 1, 6)
-    spitty_mike = Peashooter(screen, 0, 0)
-    super_spitty_mike = Gatling(screen, 4, 6)
+    sunny_mike = Sunflower(screen, 0, 0)
+    spitty_mike = Peashooter(screen, 1, 0)
+    super_spitty_mike = Gatling(screen, 2, 0)
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)
