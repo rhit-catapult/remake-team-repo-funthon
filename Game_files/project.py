@@ -38,10 +38,10 @@ def main():
 
 
         for goon3000 in range(4):   #placeholder slots
-            pygame.draw.rect(screen, (0,0,0), (15, 635), 10, 10)
-            pass
+            break
+            pygame.draw.rect(screen, (30,30,30), ((30,30), (100,100)))
+            
 
-        
 
         # TODO: Add your project code
 
