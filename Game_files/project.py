@@ -1,5 +1,6 @@
 import pygame
 import sys
+import Button_module
 import random
 import time
 
@@ -10,6 +11,14 @@ def main():
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
 
+    sun_button = Button_module.Button(screen, 115, 550, "sunflower")
+    pea_button = Button_module.Button(screen, 315, 550, "peashooter")
+    rep_button = Button_module.Button(screen, 500, 550, "repeater")
+    wall_button = Button_module.Button(screen, 665, 550, "wallnut")
+    cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    
+
+
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)
@@ -18,8 +27,21 @@ def main():
                 sys.exit()
 
             # TODO: Add you events code
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if sun_button.is_clicked_by(event.pos):
+                    print("SUN SUN SUN SUN SUN SUN ")
 
+                if pea_button.is_clicked_by(event.pos):
+                    print("PEA PEA PEA PEA PEA PEA PEA APE")
 
+                if rep_button.is_clicked_by(event.pos):
+                    print("PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PAE PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA ")
+
+                if wall_button.is_clicked_by(event.pos):
+                    print("WALLNUT")
+
+                if cherry_button.is_clicked_by(event.pos):
+                    print("KABOOM")
 # ------------------------------------- background code ---------------------------------------------------------
         screen.fill((90,135,72))
         line_y = -50
@@ -48,17 +70,19 @@ def main():
                 square_x = -100
 
 
-
-
-
         for goon4000 in range(4):   #placeholder slots
             break
             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
+
+        
             
 
-
         # TODO: Add your project code
-
+        sun_button.draw()
+        pea_button.draw()
+        rep_button.draw()
+        wall_button.draw()
+        cherry_button.draw()
         pygame.display.update()
 
 
