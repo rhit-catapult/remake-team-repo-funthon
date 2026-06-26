@@ -1,7 +1,7 @@
 import pygame
 
 class Plants:
-    def __init__(self, screen,x, y, health, damage, cost, image):
+    def __init__(self, screen: pygame.Surface,x, y, health, damage, cost, image):
         self.screen = screen
         self.x = x
         self.y = y 
@@ -19,7 +19,7 @@ class Plants:
         pass
 
 class sunflower:
-    def __init__(self, screen, x, y, health, cost, image):
+    def __init__(self, screen: pygame.Surface, x, y, health, cost, image):
         self.screen = screen
         self.x = x 
         self.y = y 
@@ -27,22 +27,22 @@ class sunflower:
         self.cost = 50
 
 class peashooter:
-    def __init__(self, screen, x, y, health, cost, image):
+    def __init__(self, screen: pygame.Surface, x, y, health, cost, image):
         self.screen = screen
         self.x = x
         self.y = y
         self.health = 6
         self.cost = 100
 
-class wallnut:
-    def __init__(self, screen, x, y, health, cost, image):
+class wallnut: 
+    def __init__(self, screen: pygame.Surface, x, y, health, cost, image):
         self.screen = screen
         self.x = x
         self.y = y
         self.health = 32
         self.cost = 50
 class cherrybomb:
-    def __init__(self, screen, x, y, cost, image):
+    def __init__(self, screen: pygame.Surface, x, y, cost, image):
         self.screen = screen
         self.x = x
         self.y = y
