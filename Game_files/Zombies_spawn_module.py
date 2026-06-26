@@ -9,30 +9,36 @@ class Zombie_spawn:
         self.columns = columns
         self.type = type
         self.heath = 0
-        self.speed = random.randint(1-3)
+        self.speed = random.randint(1, 3)
 
     
     def draw(self):
         if self.type == 1:
             #regular type zombie
-            self.heath = 2
-            self.speed += 1
-            pygame.draw.rect(self.screen, (255,255,255), (50,100))
+            self.heath = 10
+            self.speed += 6
+            pygame.draw.rect(self.screen, ("grey"), (800, 300, 50,100) )
             # TODO regular zombie
 
         if self.type == 2:
             #bucket type zombie
-            s
+            self.heath = 28
+            self.speed += 3
+            pygame.draw.rect(self.screen, ("orange"), (800, 200, 50,100) )
             # TODO bucket zombie
 
         if self.type == 3:
             #runner type zombie
-            s
+            self.heath = 6
+            self.speed += 10
+            pygame.draw.rect(self.screen, ("red"), (800, 400, 50,100) )
             # TODO runner zombie
 
         if self.type == 4:
             #hulk type zombie
-            s
+            self.heath = 150
+            self.speed += 0
+            pygame.draw.rect(self.screen, ("black"), (800, 100, 50,100) )
             # TODO hulk zombie
 
         pass
@@ -48,7 +54,7 @@ def main():
     pygame.display.set_caption("zombie test")
     # TODO: Change the size of the screen as you see fit!
     screen = pygame.display.set_mode((900, 500))
-    test_zombie
+    test_zombie = Zombie_spawn(screen, 3, random.randint(1, 4))
     # creates a Character from the my_character.py file
 
     # let's set the framerate
@@ -64,7 +70,7 @@ def main():
         # TODO: Fill the screen with whatever background color you like!
         screen.fill((90, 135, 72))
         pygame.draw.line(screen, (45, 67, 36), (0, 150), (900, 150), 100)
-        
+        test_zombie.draw()
 
         # TODO: Add your project code
 
