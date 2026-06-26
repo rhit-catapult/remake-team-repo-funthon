@@ -6,7 +6,7 @@ import Zombie_wave_module
 class Zombie_spawn:
     def __init__(self, screen, columns, type):
         self.screen = screen
-        self.y = 875
+        self.y = 900 + random.randint(0, 75)
         self.columns = columns * 100
         self.type = type
         self.heath = 0
@@ -31,7 +31,7 @@ class Zombie_spawn:
         if self.type == 2:
             #runner type zombie
             self.heath = 6
-            self.speed = 2
+            self.speed = 5
             pygame.draw.rect(self.screen, ("red"), (self.y, self.columns, 25, 100) )
             # TODO runner zombie
 
@@ -39,7 +39,7 @@ class Zombie_spawn:
             #hulk type zombie
             self.heath = 150
             self.speed = 0.30
-            pygame.draw.rect(self.screen, ("black"), (self.y, self.columns, 25, 100) )
+            pygame.draw.rect(self.screen, ("black"), (self.y - 20, self.columns, 25, 100) )
             # TODO hulk zombie
 
     def move(self):
@@ -98,6 +98,8 @@ def main():
         for goon4000 in range(4):   #placeholder slots
             break
             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
+
+
         test_zombie.move()
         test_zombie.draw()
             
