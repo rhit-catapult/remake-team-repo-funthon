@@ -4,7 +4,7 @@ import sys
 
 class Button:
     def __init__(self, screen, center_x, center_y, text, text_color=(255, 255, 255), background_color=(67, 177, 230),
-                 border_color=(255, 255, 255), padding=10, font_name="comicsansms", font_size=24):
+                 border_color=(255, 255, 255), padding=10, font_name="arialrounded", font_size=24):
         self.screen = screen
         font = pygame.font.SysFont(font_name, font_size)
         self.caption = font.render(text.upper(), True, text_color, background_color)

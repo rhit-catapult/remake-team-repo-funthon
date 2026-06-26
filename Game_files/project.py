@@ -42,7 +42,7 @@ def main():
 
                 if cherry_button.is_clicked_by(event.pos):
                     print("KABOOM")
-# ------------------------------------- background code ---------------------------------------------------------
+# ------------------------------------- background code ------------------------------------------------#
         screen.fill((90,135,72))
         line_y = -50
         line_x = -50
@@ -70,14 +70,8 @@ def main():
                 square_x = -100
 
 
-        for goon4000 in range(4):   #placeholder slots
-            break
-            pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
-
-        
-            
-
         # TODO: Add your project code
+#----------------------------------draw code------------------------------------------------------------#
         sun_button.draw()
         pea_button.draw()
         rep_button.draw()
