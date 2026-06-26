@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+
 class Plant:
     def __init__(self, screen: pygame.Surface,row, column, health, damage, cost, image_filename):
         self.screen = screen
@@ -28,47 +29,30 @@ class Sunflower(Plant):
 
 
 class Peashooter(Plant):
-    def __init__(self, screen: pygame.Surface, x, y, health, cost, image):
-        self.health = 6
-        self.cost = 100
+    def __init__(self, screen: pygame.Surface, row, column):
+        super().__init__(screen, row, column, 6, 0, 100, "peashooter.png")
 
-    def draw():
-        pass
-
-class Repeater(Plant):
-    def __init__(self, screen: pygame.Surface, x, y, health, cost, image):
-        self.health = 6
-        self.cost = 200
-
-    def draw():
-        pass
+class Gatling(Plant):
+    def __init__(self, screen: pygame.Surface, row, column):
+        super().__init__(screen, row, column, 6, 0, 200, "gatling_pea.png")
 
 class Wallnut(Plant): 
-    def __init__(self, screen: pygame.Surface, x, y, health, cost, image):
-        self.screen = screen
-        self.x = x
-        self.y = y
-        self.health = 32
-        self.cost = 50
-
-    def draw():
-        pass
+    def __init__(self, screen: pygame.Surface, row, column):
+        super().__init__(screen, row, column, 32, 0, 50, "walnut.png")
+        
 
 class Cherrybomb(Plant):
-    def __init__(self, screen: pygame.Surface, x, y, cost, image):
-        self.screen = screen
-        self.x = x
-        self.y = y
-        self.cost = 150
+    def __init__(self, screen: pygame.Surface, row, column):
+        super().__init__(screen, row, column, None, 0, 150, "cherrybomb.png")
 
-    def draw():
-        pass
 def main():
     pygame.init()
 
     pygame.display.set_caption("plants_module")
     screen = pygame.display.set_mode((1000, 650))
     sunny_mike = Sunflower(screen, 1, 6)
+    spitty_mike = Peashooter(screen, 0, 0)
+    super_spitty_mike = Gatling(screen, 4, 6)
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)
@@ -118,6 +102,8 @@ def main():
 
         # TODO: Add your project code
         sunny_mike.draw()
+        spitty_mike.draw()
+        super_spitty_mike.draw()
         pygame.display.update()
 
 if __name__ == "__main__":
