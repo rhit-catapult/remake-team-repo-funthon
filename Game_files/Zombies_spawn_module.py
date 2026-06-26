@@ -1,18 +1,16 @@
 import pygame
 import sys
 import random
-import Zombie_wave_module
+# import Zombie_wave_module
 
 class Zombie_spawn:
-    def __init__(self, screen, columns, type):
+    def __init__(self, screen:pygame.surface, columns, type):
         self.screen = screen
         self.y = 900 + random.randint(0, 75)
         self.columns = columns * 100
         self.type = type
         self.heath = 0
         self.speed = 0
-        
-
     
     def draw(self):
         if self.type == 0:
@@ -20,6 +18,7 @@ class Zombie_spawn:
             self.heath = 10
             self.speed = 1
             pygame.draw.rect(self.screen, ("grey"), (self.y, self.columns, 25,100) )
+            self.screen.blit(pygame.image.load("assets/zombie.png"), (self.y, self.columns))
             # TODO regular zombie
 
         if self.type == 1:
@@ -27,6 +26,7 @@ class Zombie_spawn:
             self.heath = 28
             self.speed = 0.75
             pygame.draw.rect(self.screen, ("orange"), (self.y, self.columns, 25, 100) )
+            self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.y, self.columns))
             # TODO bucket zombie
 
         if self.type == 2:
@@ -34,6 +34,7 @@ class Zombie_spawn:
             self.heath = 6
             self.speed = 5
             pygame.draw.rect(self.screen, ("red"), (self.y, self.columns, 25, 100) )
+            self.screen.blit(pygame.image.load("assets/runner.png"), (self.y, self.columns))
             # TODO runner zombie
 
         if self.type == 3:
@@ -41,6 +42,7 @@ class Zombie_spawn:
             self.heath = 150
             self.speed = 0.30
             pygame.draw.rect(self.screen, ("black"), (self.y - 20, self.columns, 25, 100) )
+            self.screen.blit(pygame.image.load("assets/hulk.png"), (self.y, self.columns))
             # TODO hulk zombie
 
     def move(self):
