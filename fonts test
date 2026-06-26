@@ -1,0 +1,4 @@
+import pygame
+pygame.init
+f = pygame.font.get_fonts()
+print(f)
