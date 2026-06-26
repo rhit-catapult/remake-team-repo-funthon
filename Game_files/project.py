@@ -25,6 +25,10 @@ def main():
         line_y = -50
         line_x = -50
         dark_line = (85, 128, 68)
+        dark_square = (77, 116, 62)
+        square_x = -100
+        square_y = 100
+
         for goon1000 in range(2):   #horizontal lines
             line_y += 200
             pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
@@ -36,10 +40,20 @@ def main():
         pygame.draw.line(screen, (100,100,100), (950, 0), (950, 650), 100)  #sidewalk
         pygame.draw.line(screen, (120,60,40), (0, 575), (1000, 575), 150)   #bottom bar
 
+        for goon3000 in range(8):   #darkest squares
+            square_x += 200
+            pygame.draw.rect(screen, dark_square, ((square_x,square_y),(100,100)))
+            if square_x >= 700:
+                square_y = 300
+                square_x = -100
 
-        for goon3000 in range(4):   #placeholder slots
+
+
+
+
+        for goon4000 in range(4):   #placeholder slots
             break
-            pygame.draw.rect(screen, (30,30,30), ((30,30), (100,100)))
+            pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
             
 
 
