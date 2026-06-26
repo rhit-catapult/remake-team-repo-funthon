@@ -47,36 +47,68 @@ class Zombie_spawn:
         pass
 
 def main():
-    # turn on pygame
     pygame.init()
 
-    # create a screen
-    pygame.display.set_caption("zombie test")
-    # TODO: Change the size of the screen as you see fit!
-    screen = pygame.display.set_mode((900, 500))
-    test_zombie = Zombie_spawn(screen, random.randint(0, 3), random.randint(0, 3))
-    # creates a Character from the my_character.py file
+    pygame.display.set_caption("pvz")
+    screen = pygame.display.set_mode((1000, 650))
 
-    # let's set the framerate
     clock = pygame.time.Clock()
+
+    test_zombie = Zombie_spawn(screen, random.randint(0, 3), random.randint(0, 3))
     while True:
-        clock.tick(60)  # this sets the framerate of your game
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
 
             # TODO: Add you events code
 
-        # TODO: Fill the screen with whatever background color you like!
-        screen.fill((90, 135, 72))
-        pygame.draw.line(screen, (45, 67, 36), (0, 150), (900, 150), 100)
+
+# ------------------------------------- background code ---------------------------------------------------------
+        screen.fill((90,135,72))
+        line_y = -50
+        line_x = -50
+        dark_line = (85, 128, 68)
+        dark_square = (77, 116, 62)
+        square_x = -100
+        square_y = 100
+
+        for goon1000 in range(2):   #horizontal lines
+            line_y += 200
+            pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
+               
+        for goon2000 in range(4):   #vertical lines
+            line_x += 200
+            pygame.draw.line(screen, dark_line, (line_x, 0), (line_x, 500), 100)
+
+        pygame.draw.line(screen, (100,100,100), (950, 0), (950, 650), 100)  #sidewalk
+        pygame.draw.line(screen, (120,60,40), (0, 575), (1000, 575), 150)   #bottom bar
+
+        for goon3000 in range(8):   #darkest squares
+            square_x += 200
+            pygame.draw.rect(screen, dark_square, ((square_x,square_y),(100,100)))
+            if square_x >= 700:
+                square_y = 300
+                square_x = -100
+
+
+
+
+
+        for goon4000 in range(4):   #placeholder slots
+            break
+            pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
         test_zombie.move()
         test_zombie.draw()
+            
+
 
         # TODO: Add your project code
 
-        # don't forget the update, otherwise nothing will show up!
         pygame.display.update()
 
 if __name__ == "__main__":
     main()
+
+
+
