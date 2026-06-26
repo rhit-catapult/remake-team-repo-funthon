@@ -11,6 +11,7 @@ class Zombie_spawn:
         self.type = type
         self.heath = 0
         self.speed = 0
+        
 
     
     def draw(self):
