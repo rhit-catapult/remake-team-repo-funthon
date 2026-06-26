@@ -17,28 +17,28 @@ class Zombie_spawn:
             #regular type zombie
             self.heath = 10
             self.speed += 6
-            pygame.draw.rect(self.screen, ("grey"), (800, 300, 50,100) )
+            pygame.draw.rect(self.screen, ("grey"), (850, 300, 25,50) )
             # TODO regular zombie
 
         if self.type == 2:
             #bucket type zombie
             self.heath = 28
             self.speed += 3
-            pygame.draw.rect(self.screen, ("orange"), (800, 200, 50,100) )
+            pygame.draw.rect(self.screen, ("orange"), (850, 200, 25,50) )
             # TODO bucket zombie
 
         if self.type == 3:
             #runner type zombie
             self.heath = 6
             self.speed += 10
-            pygame.draw.rect(self.screen, ("red"), (800, 400, 50,100) )
+            pygame.draw.rect(self.screen, ("red"), (850, 400, 25,50) )
             # TODO runner zombie
 
         if self.type == 4:
             #hulk type zombie
             self.heath = 150
             self.speed += 0
-            pygame.draw.rect(self.screen, ("black"), (800, 100, 50,100) )
+            pygame.draw.rect(self.screen, ("black"), (850, 100, 25,50) )
             # TODO hulk zombie
 
         pass
