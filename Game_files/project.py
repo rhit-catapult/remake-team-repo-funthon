@@ -1,5 +1,6 @@
 import pygame
 import sys
+import Button_module
 import random
 import time
 
@@ -9,6 +10,7 @@ def main():
 
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
+
 
     clock = pygame.time.Clock()
     while True:
@@ -48,17 +50,14 @@ def main():
                 square_x = -100
 
 
-
-
-
         for goon4000 in range(4):   #placeholder slots
             break
             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
+
+        
             
 
-
         # TODO: Add your project code
-
         pygame.display.update()
 
 
