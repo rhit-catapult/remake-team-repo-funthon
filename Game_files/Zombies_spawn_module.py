@@ -19,15 +19,13 @@ class Zombie_spawn:
             self.speed = 1
             pygame.draw.rect(self.screen, ("grey"), (self.y, self.columns, 25,100) )
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.y, self.columns))
-            # TODO regular zombie
-
+            
         if self.type == 1:
             #bucket type zombie
             self.heath = 28
             self.speed = 0.75
             pygame.draw.rect(self.screen, ("orange"), (self.y, self.columns, 25, 100) )
             self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.y, self.columns))
-            # TODO bucket zombie
 
         if self.type == 2:
             #runner type zombie
@@ -35,7 +33,6 @@ class Zombie_spawn:
             self.speed = 5
             pygame.draw.rect(self.screen, ("red"), (self.y, self.columns, 25, 100) )
             self.screen.blit(pygame.image.load("assets/runner.png"), (self.y, self.columns))
-            # TODO runner zombie
 
         if self.type == 3:
             #hulk type zombie
@@ -43,7 +40,6 @@ class Zombie_spawn:
             self.speed = 0.30
             pygame.draw.rect(self.screen, ("black"), (self.y - 20, self.columns, 25, 100) )
             self.screen.blit(pygame.image.load("assets/hulk.png"), (self.y, self.columns))
-            # TODO hulk zombie
 
     def move(self):
         self.y -= self.speed/5
@@ -57,7 +53,7 @@ def main():
 
     clock = pygame.time.Clock()
 
-    test_zombie = Zombie_spawn(screen, random.randint(0, 3), random.randint(0, 3))
+    test_zombie = Zombie_spawn(screen, random.randint(0, 4), random.randint(0, 3))
     while True:
         clock.tick(60)
         for event in pygame.event.get():
