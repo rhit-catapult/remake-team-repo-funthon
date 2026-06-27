@@ -76,7 +76,9 @@ def main():
                 sys.exit()
 
             # TODO: Add you events code
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                print("TODO: make the cursor look like sunflower.png")
+                pygame.mouse.set_visible(False)
 
 # ------------------------------------- background code ---------------------------------------------------------
         screen.fill((90,135,72))
