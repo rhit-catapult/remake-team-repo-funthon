@@ -3,7 +3,7 @@ import sys
 
 
 class Button:
-    def __init__(self, screen, center_x, center_y, text, text_color=(255, 255, 255), background_color=(67, 177, 230),
+    def __init__(self, screen, center_x, center_y, text, text_color=(255, 255, 255), background_color=(0, 0, 0),
                  border_color=(255, 255, 255), padding=10, font_name="arialrounded", font_size=24):
         self.screen = screen
         font = pygame.font.SysFont(font_name, font_size)
@@ -17,6 +17,7 @@ class Button:
         self.bound_bottom_y = self.caption_y + self.caption.get_height() + self.padding
         self.background_color = background_color
         self.border_color = border_color
+        self.text_color = text_color
 
     def draw(self):
         width = self.bound_right_x - self.bound_left_x
