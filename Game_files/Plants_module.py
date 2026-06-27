@@ -22,10 +22,23 @@ class Plant:
 
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 6, 0, 50, "assets/sunflower.png") 
-       
+        super().__init__(screen, row, column, 6, 0, 50, "assets/not_sunny_sunflower.png")
+        self.images = [
+            pygame.image.load("assets/not_sunny_sunflower.png"),
+            pygame.image.load("assets/sunflower.png"),
+        ]
+        self.image_index = 0
+        self.image = self.images[self.image_index]
+        self.last_switch_time = pygame.time.get_ticks()
+        self.switch_interval_ms = 25000
 
-   
+    def draw(self):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_switch_time >= self.switch_interval_ms:
+            self.image_index = (self.image_index + 1) % len(self.images)
+            self.image = self.images[self.image_index]
+            self.last_switch_time = current_time
+        super().draw()
 
 
 class Peashooter(Plant):
@@ -53,6 +66,8 @@ def main():
     sunny_mike = Sunflower(screen, 0, 0)
     spitty_mike = Peashooter(screen, 1, 0)
     super_spitty_mike = Gatling(screen, 2, 0)
+    dense_mike = Wallnut(screen, 3,0)
+    boom_mike = Cherrybomb(screen, 4, 0)
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)
@@ -75,7 +90,7 @@ def main():
         for goon1000 in range(2):   #horizontal lines
             line_y += 200
             pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
-               
+            
         for goon2000 in range(4):   #vertical lines
             line_x += 200
             pygame.draw.line(screen, dark_line, (line_x, 0), (line_x, 500), 100)
@@ -104,6 +119,8 @@ def main():
         sunny_mike.draw()
         spitty_mike.draw()
         super_spitty_mike.draw()
+        dense_mike.draw()
+        boom_mike.draw()
         pygame.display.update()
 
 if __name__ == "__main__":
