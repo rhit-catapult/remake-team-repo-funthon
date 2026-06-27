@@ -1,8 +1,6 @@
 import pygame
-import sys
-import Button_module
-import random
-import time
+import sys, random, time
+import Button_module, peas_module
 
 
 def main():
@@ -77,6 +75,7 @@ def main():
         rep_button.draw()
         wall_button.draw()
         cherry_button.draw()
+        sun_button.border_color = "blue"
         pygame.display.update()
 
 
