@@ -15,7 +15,7 @@ class Zombie_wave:
 
     def spawn_chance(self):
        # elapsed_time = time.perf_counter() - self.start_time
-        if random.randint(-1,1) == 1: #random.randint(elapsed_time ** 2, self.likely_hood) == self.likely_hood:
+        if random.randint(-100,100) == 1: #random.randint(elapsed_time ** 2, self.likely_hood) == self.likely_hood:
             print("working")
             self.random_chance = random.randint(0, 99)
             if self.random_chance <= 74:
@@ -24,12 +24,18 @@ class Zombie_wave:
                 #TODO regular zombie code
                 print("normal")
             if 74 < self.random_chance <= 89:
+                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1)
+                self.zombies.append(zombiespawn)
                 #TODO bucket zombie code
                 print("bucket")
             if 89 < self.random_chance <= 98:
+                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2)
+                self.zombies.append(zombiespawn)
                 #TODO runner zombie code
                 print("runner")
             if self.random_chance == 99:
+                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3)
+                self.zombies.append(zombiespawn)
                 #TODO hulk zombie code
                 print("hulk")
 

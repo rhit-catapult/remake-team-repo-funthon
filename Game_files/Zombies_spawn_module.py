@@ -17,28 +17,24 @@ class Zombie_spawn:
             #regular type zombie
             self.heath = 10
             self.speed = 1
-            pygame.draw.rect(self.screen, ("grey"), (self.y, self.columns, 25,100) )
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.y, self.columns))
             
         if self.type == 1:
             #bucket type zombie
             self.heath = 28
             self.speed = 0.75
-            pygame.draw.rect(self.screen, ("orange"), (self.y, self.columns, 25, 100) )
             self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.y, self.columns))
 
         if self.type == 2:
             #runner type zombie
             self.heath = 6
             self.speed = 5
-            pygame.draw.rect(self.screen, ("red"), (self.y, self.columns, 25, 100) )
             self.screen.blit(pygame.image.load("assets/runner.png"), (self.y, self.columns))
 
         if self.type == 3:
             #hulk type zombie
             self.heath = 150
             self.speed = 0.30
-            pygame.draw.rect(self.screen, ("black"), (self.y - 20, self.columns, 25, 100) )
             self.screen.blit(pygame.image.load("assets/hulk.png"), (self.y, self.columns))
 
     def move(self):
