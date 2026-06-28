@@ -39,7 +39,11 @@ class Zombie_spawn:
 
     def move(self):
         self.y -= self.speed/5
-        pass
+
+    def hit_by(self, zombie):
+        hit_box = pygame.Rect(self.columns, self.y, 25, 100)
+        return hit_box.collidepoint(zombie.x, zombie.y)
+
 
 # def main():
 #     pygame.init()

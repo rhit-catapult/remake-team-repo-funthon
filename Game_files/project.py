@@ -90,7 +90,6 @@ def main():
         if poop == True:
            first_screen.draw()
            start_button.draw()
-           print("poop")
 
         pygame.display.update()
 

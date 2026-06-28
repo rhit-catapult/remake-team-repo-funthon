@@ -4,13 +4,13 @@ class start_screen:
     def __init__(self, screen: pygame.surface):
         self.screen = screen
         self.font = pygame.font.SysFont("arialrounded", 42)
-        self.caption = self.font.render("start game?", True, (0,0,0), (255,255,255))
+        self.caption_1 = self.font.render("start game?", True, (0,0,0), (255,255,255))
         self.start_button = Button_module.Button(self.screen, 100, 100, "Start")
         
 
     def draw(self):
         self.screen.fill((0,0,0))
-        self.screen.blit(self.caption,(300,400))
+        self.screen.blit(self.caption_1,(300,200))
 
 
 # def main():

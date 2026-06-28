@@ -21,25 +21,19 @@ class Zombie_wave:
             if self.random_chance <= 74:
                 zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0)
                 self.zombies.append(zombiespawn)
-                #TODO regular zombie code
                 print("normal")
             if 74 < self.random_chance <= 89:
                 zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1)
                 self.zombies.append(zombiespawn)
-                #TODO bucket zombie code
                 print("bucket")
             if 89 < self.random_chance <= 98:
                 zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2)
                 self.zombies.append(zombiespawn)
-                #TODO runner zombie code
                 print("runner")
             if self.random_chance == 99:
                 zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3)
                 self.zombies.append(zombiespawn)
-                #TODO hulk zombie code
                 print("hulk")
-
-            #TODO summon zombie type based on spawn code
 
 def main():
     pygame.init()
