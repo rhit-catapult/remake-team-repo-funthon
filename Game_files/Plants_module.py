@@ -1,6 +1,7 @@
 import pygame
 import sys
 import random
+import Button_module
 
 class Plant:
     def __init__(self, screen: pygame.Surface,row, column, health, damage, cost, image_filename):
@@ -22,19 +23,19 @@ class Plant:
 
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 6, 0, 50, "assets/not_sunny_sunflower.png")
+        super().__init__(screen, row, column, 6, 0, 50, "assets/notsunnysunflower.png")
         self.images = [
-            pygame.image.load("assets/not_sunny_sunflower.png"),
+            pygame.image.load("assets/notsunnysunflower.png"),
             pygame.image.load("assets/sunflower.png"),
         ]
         self.image_index = 0
         self.image = self.images[self.image_index]
         self.last_switch_time = pygame.time.get_ticks()
-        self.switch_interval_ms = 25000
+        self.durations_ms = [5000, 2000]
 
     def draw(self):
         current_time = pygame.time.get_ticks()
-        if current_time - self.last_switch_time >= self.switch_interval_ms:
+        if current_time - self.last_switch_time >= self.durations_ms[self.image_index]:
             self.image_index = (self.image_index + 1) % len(self.images)
             self.image = self.images[self.image_index]
             self.last_switch_time = current_time
@@ -63,6 +64,12 @@ def main():
 
     pygame.display.set_caption("plants_module")
     screen = pygame.display.set_mode((1000, 650))
+    sun_button = Button_module.Button(screen, 115, 550, "sunflower")
+    pea_button = Button_module.Button(screen, 315, 550, "peashooter")
+    rep_button = Button_module.Button(screen, 500, 550, "repeater")
+    wall_button = Button_module.Button(screen, 665, 550, "wallnut")
+    cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    
     sunny_mike = Sunflower(screen, 0, 0)
     spitty_mike = Peashooter(screen, 1, 0)
     super_spitty_mike = Gatling(screen, 2, 0)
