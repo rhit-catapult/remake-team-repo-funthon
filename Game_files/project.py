@@ -2,7 +2,6 @@ import pygame
 import sys, random, time
 import Button_module, peas_module, start_screen_module, Zombie_wave_module, money_module
 
-
 def main():
     poop = True
     fart = False
@@ -10,7 +9,9 @@ def main():
 
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
+
     wave = Zombie_wave_module.Zombie_wave(screen)
+
     sun_button = Button_module.Button(screen, 115, 550, "sunflower")
     pea_button = Button_module.Button(screen, 315, 550, "peashooter")
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
@@ -19,12 +20,12 @@ def main():
 
     start_button = Button_module.Button(screen, 500, 300, "play")
     end_button = Button_module.Button(screen, 500, 300, "restart?")
-
     first_screen = start_screen_module.start_screen(screen)
     end_screen = start_screen_module.start_screen(screen)
 
-    clock = pygame.time.Clock()
+    sun_counter = money_module.money(screen)
 
+    clock = pygame.time.Clock()
 
     while True:
         
@@ -33,7 +34,6 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
     
-            # TODO: Add you events code
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if sun_button.is_clicked_by(event.pos):
                     print("SUN SUN SUN SUN SUN SUN ")
@@ -89,9 +89,6 @@ def main():
                     square_y = 300
                     square_x = -100
 
-
-
-            # TODO: Add your project code
     #----------------------------------draw code------------------------------------------------------------#
             sun_button.draw()
             pea_button.draw()
@@ -99,6 +96,9 @@ def main():
             wall_button.draw()
             cherry_button.draw()
             sun_button.border_color = "blue"
+
+            sun_counter.natural_sun()
+            sun_counter.draw()
             
             wave.spawn_chance()
             for zombie in wave.zombies:
@@ -113,6 +113,5 @@ def main():
             end_button.draw()
 
         pygame.display.update()
-
 
 main()

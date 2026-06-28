@@ -17,7 +17,7 @@ class Zombie_spawn:
         if self.type == 0:
             #regular type zombie
             self.heath = 10
-            self.speed = 10
+            self.speed = 1
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.x, self.columns))
             
         if self.type == 1:
@@ -28,7 +28,7 @@ class Zombie_spawn:
 
         if self.type == 2:
             #runner type zombie
-            self.heath = 6
+            self.heath = 3
             self.speed = 5
             self.screen.blit(pygame.image.load("assets/runner.png"), (self.x, self.columns))
 
