@@ -6,6 +6,19 @@ def main():
     poop = True
     fart = False
     pygame.init()
+    
+    try:
+        pygame.mixer.init()
+    except Exception:
+        pass
+    
+    try:
+        music_tracks = ["assets/5-loonboon.mp3", "assets/hype_zombie_music.mp3"]
+        music_index = 0
+        MUSIC_END = pygame.USEREVENT + 1
+        music_started = False
+    except Exception:
+        print("Warning: failed to load background music")
 
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
@@ -33,6 +46,14 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            # handle end of music track to play next sequentially
+            if event.type == pygame.USEREVENT + 1:
+                try:
+                    music_index = (music_index + 1) % len(music_tracks)
+                    pygame.mixer.music.load(music_tracks[music_index])
+                    pygame.mixer.music.play()
+                except Exception:
+                    pass
     
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if sun_button.is_clicked_by(event.pos):
@@ -58,6 +79,17 @@ def main():
                     wave.zombies.clear()
 # ------------------------------------- background code ------------------------------------------------#
         
+        # start music when gameplay begins
+        if poop == False and 'music_started' in locals() and not music_started:
+            try:
+                pygame.mixer.music.set_volume(0.4)
+                pygame.mixer.music.load(music_tracks[music_index])
+                pygame.mixer.music.play()
+                pygame.mixer.music.set_endevent(MUSIC_END)
+            except Exception:
+                pass
+            music_started = True
+
         if poop == True:
             first_screen.draw_start()
             start_button.draw()
