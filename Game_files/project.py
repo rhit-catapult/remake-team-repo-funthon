@@ -23,6 +23,13 @@ def main():
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
 
+    # load plant preview images
+    try:
+        sunflower_preview = pygame.image.load("assets/sunflower.png").convert_alpha()
+    except Exception:
+        sunflower_preview = None
+    selected_plant_image = None
+
     wave = Zombie_wave_module.Zombie_wave(screen)
 
     sun_button = Button_module.Button(screen, 115, 550, "sunflower")
@@ -57,7 +64,13 @@ def main():
     
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if sun_button.is_clicked_by(event.pos):
-                    print("SUN SUN SUN SUN SUN SUN ")
+                    # toggle sunflower placement preview
+                    if selected_plant_image is None and sunflower_preview is not None:
+                        selected_plant_image = sunflower_preview
+                        pygame.mouse.set_visible(False)
+                    else:
+                        selected_plant_image = None
+                        pygame.mouse.set_visible(True)
 
                 if pea_button.is_clicked_by(event.pos):
                     print("PEA PEA PEA PEA PEA PEA PEA APE")
@@ -140,6 +153,15 @@ def main():
                     if zombie.at_end() == True:
                         fart = True
                     wave.zombies.remove(zombie)
+            # draw selected plant preview at mouse position
+            if selected_plant_image is not None:
+                try:
+                    mx, my = pygame.mouse.get_pos()
+                    img_w = selected_plant_image.get_width()
+                    img_h = selected_plant_image.get_height()
+                    screen.blit(selected_plant_image, (mx - img_w // 2, my - img_h // 2))
+                except Exception:
+                    pass
         if fart == True:
             end_screen.draw_end()
             end_button.draw()
