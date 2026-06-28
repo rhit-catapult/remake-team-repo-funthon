@@ -1,4 +1,4 @@
-import pygame ,  Button_module
+import pygame, Button_module
 class Pea():
     def __init__(self, screen: pygame.surface, x, y):
         self.screen = screen
