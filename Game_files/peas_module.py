@@ -1,4 +1,4 @@
-import pygame #,  Button_module
+import pygame, Button_module
 class Pea():
     def __init__(self, screen: pygame.surface, x, y):
         self.screen = screen
@@ -95,7 +95,7 @@ class Pea():
 
 #         test_pea.move()
 #         test_pea.draw()
-#         test_pea.off_screen()
+#         #test_pea.off_screen()
 #         pygame.display.update()
 
 
