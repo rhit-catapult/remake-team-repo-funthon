@@ -9,9 +9,7 @@ class money():
         self.last_sun = 0
         self.delay = 5000
         self.font = pygame.font.SysFont("arialrounded", 42)
-        
 
-        
     
     def sun_change(self, sundif):
         self.sun += sundif
@@ -26,7 +24,7 @@ class money():
             self.draw()
 
     def draw(self):
-         self.screen.blit(self.font.render(f"number: {self.sun}", True, (0,0,0), (255,255,255)),(300,200))
+         self.screen.blit(self.font.render(f"number: {self.sun}", True, (255,255,255), (120,60,40)),(50,575))
             
 
 def main():
