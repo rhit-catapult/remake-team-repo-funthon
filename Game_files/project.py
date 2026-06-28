@@ -55,6 +55,7 @@ def main():
                 
                 if end_button.is_clicked_by(event.pos):
                     fart = False
+                    wave.zombies.clear()
 # ------------------------------------- background code ------------------------------------------------#
         
         if poop == True:

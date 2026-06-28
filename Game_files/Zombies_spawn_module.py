@@ -17,7 +17,7 @@ class Zombie_spawn:
         if self.type == 0:
             #regular type zombie
             self.heath = 10
-            self.speed = 1
+            self.speed = 10
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.x, self.columns))
             
         if self.type == 1:
@@ -46,7 +46,7 @@ class Zombie_spawn:
         return hit_box.collidepoint(zombie.x, zombie.y)
     
     def at_end(self):
-        if self.x < 100:
+        if self.x < -80:
             return True
 
 # def main():
