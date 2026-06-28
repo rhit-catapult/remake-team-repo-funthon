@@ -11,14 +11,13 @@ def main():
         pygame.mixer.init()
     except Exception:
         pass
-    
-    try:
-        music_tracks = ["assets/5-loonboon.mp3", "assets/hype_zombie_music.mp3"]
-        music_index = 0
-        MUSIC_END = pygame.USEREVENT + 1
-        music_started = False
-    except Exception:
-        print("Warning: failed to load background music")
+
+    music_available = pygame.mixer.get_init() is not None
+    music_tracks = ["assets/5-loonboon.mp3", "assets/hype_zombie_music.mp3"]
+    music_index = 0
+    MUSIC_END = pygame.USEREVENT + 1
+    music_started = False
+
 
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
@@ -86,23 +85,22 @@ def main():
 
                 if start_button.is_clicked_by(event.pos):
                     poop = False
+                    if music_available and not music_started:
+                        try:
+                            pygame.mixer.music.set_volume(0.4)
+                            pygame.mixer.music.load(music_tracks[music_index])
+                            pygame.mixer.music.play()
+                            pygame.mixer.music.set_endevent(MUSIC_END)
+                        except Exception:
+                            pass
+                        music_started = True
                 
                 if end_button.is_clicked_by(event.pos):
                     fart = False
                     wave.zombies.clear()
 # ------------------------------------- background code ------------------------------------------------#
         
-        # start music when gameplay begins
-        if poop == False and 'music_started' in locals() and not music_started:
-            try:
-                pygame.mixer.music.set_volume(0.4)
-                pygame.mixer.music.load(music_tracks[music_index])
-                pygame.mixer.music.play()
-                pygame.mixer.music.set_endevent(MUSIC_END)
-            except Exception:
-                pass
-            music_started = True
-
+        
         if poop == True:
             first_screen.draw_start()
             start_button.draw()
@@ -153,15 +151,7 @@ def main():
                     if zombie.at_end() == True:
                         fart = True
                     wave.zombies.remove(zombie)
-            # draw selected plant preview at mouse position
-            if selected_plant_image is not None:
-                try:
-                    mx, my = pygame.mouse.get_pos()
-                    img_w = selected_plant_image.get_width()
-                    img_h = selected_plant_image.get_height()
-                    screen.blit(selected_plant_image, (mx - img_w // 2, my - img_h // 2))
-                except Exception:
-                    pass
+            
         if fart == True:
             end_screen.draw_end()
             end_button.draw()
