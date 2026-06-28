@@ -23,9 +23,9 @@ class Plant:
 
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
-        super().__init__(screen, row, column, 6, 0, 50, "assets/not_sunny_sunflower.png")
+        super().__init__(screen, row, column, 6, 0, 50, "assets/notsunnysunflower.png")
         self.images = [
-            pygame.image.load("assets/not_sunny_sunflower.png"),
+            pygame.image.load("assets/notsunnysunflower.png"),
             pygame.image.load("assets/sunflower.png"),
         ]
         self.image_index = 0
@@ -69,6 +69,7 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    
     sunny_mike = Sunflower(screen, 0, 0)
     spitty_mike = Peashooter(screen, 1, 0)
     super_spitty_mike = Gatling(screen, 2, 0)
