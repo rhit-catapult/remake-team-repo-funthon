@@ -1,6 +1,6 @@
 import pygame
 import sys, random, time
-import Button_module, peas_module, start_screen_module
+import Button_module, peas_module, start_screen_module, Zombie_wave_module
 
 
 def main():
@@ -9,7 +9,7 @@ def main():
 
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
-
+    wave = Zombie_wave_module.Zombie_wave(screen)
     sun_button = Button_module.Button(screen, 115, 550, "sunflower")
     pea_button = Button_module.Button(screen, 315, 550, "peashooter")
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
@@ -86,6 +86,12 @@ def main():
         wall_button.draw()
         cherry_button.draw()
         sun_button.border_color = "blue"
+        
+        wave.spawn_chance()
+        for zombie in wave.zombies:
+           zombie.move()
+           zombie.draw()
+
 
         if poop == True:
            first_screen.draw()

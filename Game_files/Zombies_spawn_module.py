@@ -109,7 +109,4 @@ class Zombie_spawn:
 #         pygame.display.update()
 
 # if __name__ == "__main__":
-#     main()
-
-
-
+    #main()
