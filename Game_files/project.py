@@ -1,9 +1,10 @@
 import pygame
 import sys, random, time
-import Button_module, peas_module
+import Button_module, peas_module, start_screen_module
 
 
 def main():
+    poop = True
     pygame.init()
 
     pygame.display.set_caption("pvz")
@@ -14,11 +15,16 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
-    
+    start_button = Button_module.Button(screen, 500, 300, "play")
+
+    first_screen = start_screen_module.start_screen(screen)
 
 
     clock = pygame.time.Clock()
     while True:
+        
+        
+        
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -40,7 +46,11 @@ def main():
 
                 if cherry_button.is_clicked_by(event.pos):
                     print("KABOOM")
+
+                if start_button.is_clicked_by(event.pos):
+                    poop = False
 # ------------------------------------- background code ------------------------------------------------#
+        
         screen.fill((90,135,72))
         line_y = -50
         line_x = -50
@@ -76,6 +86,12 @@ def main():
         wall_button.draw()
         cherry_button.draw()
         sun_button.border_color = "blue"
+
+        if poop == True:
+           first_screen.draw()
+           start_button.draw()
+           print("poop")
+
         pygame.display.update()
 
 

@@ -1,45 +1,17 @@
-import pygame
-import sys
-import random
-# import Zombie_wave_module
+import pygame, sys, time, random, Button_module
 
-class Zombie_spawn:
-    def __init__(self, screen:pygame.surface, columns, type):
+class start_screen:
+    def __init__(self, screen: pygame.surface):
         self.screen = screen
-        self.y = 900 + random.randint(0, 75)
-        self.columns = columns * 100
-        self.type = type
-        self.heath = 0
-        self.speed = 0
-    
+        self.font = pygame.font.SysFont("arialrounded", 42)
+        self.caption = self.font.render("start game?", True, (0,0,0), (255,255,255))
+        self.start_button = Button_module.Button(self.screen, 100, 100, "Start")
+        
+
     def draw(self):
-        if self.type == 0:
-            #regular type zombie
-            self.heath = 10
-            self.speed = 1
-            self.screen.blit(pygame.image.load("assets/zombie.png"), (self.y, self.columns))
-            
-        if self.type == 1:
-            #bucket type zombie
-            self.heath = 28
-            self.speed = 0.75
-            self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.y, self.columns))
+        self.screen.fill((0,0,0))
+        self.screen.blit(self.caption,(300,400))
 
-        if self.type == 2:
-            #runner type zombie
-            self.heath = 6
-            self.speed = 5
-            self.screen.blit(pygame.image.load("assets/runner.png"), (self.y, self.columns))
-
-        if self.type == 3:
-            #hulk type zombie
-            self.heath = 150
-            self.speed = 0.30
-            self.screen.blit(pygame.image.load("assets/hulk.png"), (self.y, self.columns))
-
-    def move(self):
-        self.y -= self.speed/5
-        pass
 
 # def main():
 #     pygame.init()
@@ -49,7 +21,7 @@ class Zombie_spawn:
 
 #     clock = pygame.time.Clock()
 
-#     test_zombie = Zombie_spawn(screen, random.randint(0, 4), random.randint(0, 3))
+#     test_zombie = start_screen(screen)
 #     while True:
 #         clock.tick(60)
 #         for event in pygame.event.get():
@@ -95,7 +67,7 @@ class Zombie_spawn:
 #             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
 
 
-#         test_zombie.move()
+
 #         test_zombie.draw()
             
 
@@ -106,6 +78,3 @@ class Zombie_spawn:
 
 # if __name__ == "__main__":
 #     main()
-
-
-
