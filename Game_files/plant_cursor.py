@@ -2,6 +2,7 @@ import pygame
 import time
 import Button_module
 import sys
+import Plants_module
 
 
 class PlantCursor:
@@ -20,6 +21,8 @@ class PlantCursor:
     def draw(self):
         """ Draws this sprite onto the screen. """
         
+
+        
         if self.showing_plant == "sunflower":
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
@@ -32,11 +35,11 @@ class PlantCursor:
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
             self.screen.blit(self.image_peashooter, (mouse_pos_x-50, mouse_pos_y-50))
-        elif self.showing_plant == "walnut":
+        elif self.showing_plant == "wallnut":
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
             self.screen.blit(self.image_walnut, (mouse_pos_x-50, mouse_pos_y-50))
-        elif self.showing_plant == "gatling_pea":
+        elif self.showing_plant == "gatling":
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
             self.screen.blit(self.image_gatling_pea, (mouse_pos_x-50, mouse_pos_y-50))
@@ -61,7 +64,9 @@ def main():
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
 
-
+    all_plants = []
+    # all_plants.append(Plants_module.Sunflower(screen, 0, 0))
+    
     plant_cursor = PlantCursor(screen)
     
     # sunny_mike = Sunflower(screen, 0, 0)
@@ -76,11 +81,41 @@ def main():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-            # TODO: Add you events code
             if event.type == pygame.MOUSEBUTTONDOWN:
-                print("TODO: make the cursor look like sunflower.png")
-                plant_cursor.showing_plant = "sunflower"
-                
+                if sun_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "sunflower"
+                elif pea_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "peashooter"
+                elif rep_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "gatling"
+                elif wall_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "wallnut"
+                elif cherry_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "cherrybomb"
+                elif plant_cursor.showing_plant != "":
+                    print(f"Placing {plant_cursor.showing_plant} at {event.pos}")
+                    
+                    mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
+                    row = mouse_pos_y // 100
+                    col = mouse_pos_x // 100
+                    if plant_cursor.showing_plant == "sunflower":
+                       all_plants.append(Plants_module.Sunflower(screen, row, col))
+                    elif plant_cursor.showing_plant == "cherrybomb":
+                        all_plants.append(Plants_module.Cherrybomb(screen, row, col))
+                    elif plant_cursor.showing_plant == "peashooter":
+                        all_plants.append(Plants_module.Peashooter(screen, row, col))
+                    elif plant_cursor.showing_plant == "wallnut":
+                        all_plants.append(Plants_module.Wallnut(screen, row, col))
+                    elif plant_cursor.showing_plant == "gatling":
+                        all_plants.append(Plants_module.Gatling(screen, row, col))
+                        
+                    else:
+                        pygame.mouse.set_visible(True)
+                    plant_cursor.showing_plant = ""
+                else:
+                    plant_cursor.showing_plant = ""
+
+
 
 # ------------------------------------- background code ---------------------------------------------------------
         screen.fill((90,135,72))
@@ -118,7 +153,8 @@ def main():
             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
             
 
-
+        for plants in all_plants:
+            plants.draw()
         # TODO: Add your project code
         # sunny_mike.draw()
         # spitty_mike.draw()
@@ -126,6 +162,11 @@ def main():
         # dense_mike.draw()
         # boom_mike.draw()
         plant_cursor.draw()
+        sun_button.draw()
+        pea_button.draw()
+        rep_button.draw()
+        wall_button.draw()
+        cherry_button.draw()
         pygame.display.update()
 
 if __name__ == "__main__":
