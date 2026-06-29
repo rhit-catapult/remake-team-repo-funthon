@@ -10,7 +10,10 @@ class money():
         self.delay = 5000
         self.font = pygame.font.SysFont("arialrounded", 42)
 
-    
+    def sun_reset(self):
+        self.sun = -25
+        self.last_sun = 0
+
     def sun_change(self, sundif):
         self.sun += sundif
         
