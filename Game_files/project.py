@@ -38,7 +38,10 @@ def main():
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
 
     start_button = Button_module.Button(screen, 500, 300, "play")
+    start_button.border_color = "white"
     end_button = Button_module.Button(screen, 500, 300, "restart?")
+    end_button.border_color = "white"
+
     first_screen = start_screen_module.start_screen(screen)
     end_screen = start_screen_module.start_screen(screen)
 
@@ -49,6 +52,8 @@ def main():
     while True:
         
         clock.tick(60)
+        sun_amount = sun_counter.check_sun()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -138,12 +143,25 @@ def main():
 
 
     #----------------------------------draw code------------------------------------------------------------#
+            if  sun_amount >= 50:
+                sun_button.border_color = "blue"
+                wall_button.border_color = "blue"
+
+            if sun_amount >= 100:
+                pea_button.border_color = "blue"
+
+            if sun_amount >= 150:
+                cherry_button.border_color = "blue"
+                
+            if sun_amount >= 200:
+                rep_button.border_color = "blue"
+
+            
             sun_button.draw()
             pea_button.draw()
             rep_button.draw()
             wall_button.draw()
             cherry_button.draw()
-            sun_button.border_color = "blue"
 
             sun_counter.draw()
             
