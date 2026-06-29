@@ -244,3 +244,4 @@ def main():
         pygame.display.update()
 
 main()
+print(int(0.5))

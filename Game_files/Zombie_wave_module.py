@@ -12,91 +12,118 @@ class Zombie_wave:
         self.zombies = []
         self.likely_hood = 500000 #TODO find a good value for this so that zombie spawning ramps up well
         self.random_chance = 0
+        self.spawn_rate = 1
+        self.spawn_rate_increase = 2.01
 
     def spawn_chance(self):
        # elapsed_time = time.perf_counter() - self.start_time
-        if random.randint(-100,100) == 1: #random.randint(elapsed_time ** 2, self.likely_hood) == self.likely_hood:
-            self.random_chance = random.randint(0, 99)
-            if self.random_chance <= 74:
-                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0)
-                self.zombies.append(zombiespawn)
-            if 74 < self.random_chance <= 89:
-                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1)
-                self.zombies.append(zombiespawn)
-            if 89 < self.random_chance <= 98:
-                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2)
-                self.zombies.append(zombiespawn)
-            if self.random_chance == 99:
-                zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3)
-                self.zombies.append(zombiespawn)
+        #if random.randint(0,100) == 1: #random.randint(elapsed_time ** 2, self.likely_hood) == self.likely_hood:
+        self.random_chance = random.randint(0, 99)
+        if self.random_chance <= 74:
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0)
+            self.zombies.append(zombiespawn)
+        if 74 < self.random_chance <= 89:
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1)
+            self.zombies.append(zombiespawn)
+        if 89 < self.random_chance <= 98:
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2)
+            self.zombies.append(zombiespawn)
+        if self.random_chance == 99:
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3)
+            self.zombies.append(zombiespawn)
 
-# def main():
-#     pygame.init()
+    def difficulty_increase(self):
+        if self.spawn_rate >= 60:
+            Zombie_wave.spawn_chance(self)
+            self.spawn_rate = 0
+        self.spawn_rate += 1**self.spawn_rate_increase
+        #print(self.spawn_rate)
 
-#     pygame.display.set_caption("zombie test")
-#     screen = pygame.display.set_mode((1000, 650))
-
-#     clock = pygame.time.Clock()
-
-#     test_zombie = Zombie_wave(screen)
-#     while True:
-#         clock.tick(60)
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 sys.exit()
-
-#             # TODO: Add you events code
+    def check(self):
+        print(self.spawn_rate)
+        return self.spawn_rate
 
 
-# # ------------------------------------- background code ---------------------------------------------------------
-#         screen.fill((90,135,72))
-#         line_y = -50
-#         line_x = -50
-#         dark_line = (85, 128, 68)
-#         dark_square = (77, 116, 62)
-#         square_x = -100
-#         square_y = 100
+def main():
+    time4 = 0
+    number = 0
+    numex = 1
+    total_spawns = 0
+    total_time = time.time()
+    pygame.init()
 
-#         for goon1000 in range(2):   #horizontal lines
-#             line_y += 200
-#             pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
+    pygame.display.set_caption("zombie test")
+    screen = pygame.display.set_mode((1000, 650))
+
+    clock = pygame.time.Clock()
+
+    test_zombie = Zombie_wave(screen)
+    while True:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+
+            # TODO: Add you events code
+
+
+# ------------------------------------- background code ---------------------------------------------------------
+        screen.fill((90,135,72))
+        line_y = -50
+        line_x = -50
+        dark_line = (85, 128, 68)
+        dark_square = (77, 116, 62)
+        square_x = -100
+        square_y = 100
+
+        for goon1000 in range(2):   #horizontal lines
+            line_y += 200
+            pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
                
-#         for goon2000 in range(4):   #vertical lines
-#             line_x += 200
-#             pygame.draw.line(screen, dark_line, (line_x, 0), (line_x, 500), 100)
+        for goon2000 in range(4):   #vertical lines
+            line_x += 200
+            pygame.draw.line(screen, dark_line, (line_x, 0), (line_x, 500), 100)
 
-#         pygame.draw.line(screen, (100,100,100), (950, 0), (950, 650), 100)  #sidewalk
-#         pygame.draw.line(screen, (120,60,40), (0, 575), (1000, 575), 150)   #bottom bar
+        pygame.draw.line(screen, (100,100,100), (950, 0), (950, 650), 100)  #sidewalk
+        pygame.draw.line(screen, (120,60,40), (0, 575), (1000, 575), 150)   #bottom bar
 
-#         for goon3000 in range(8):   #darkest squares
-#             square_x += 200
-#             pygame.draw.rect(screen, dark_square, ((square_x,square_y),(100,100)))
-#             if square_x >= 700:
-#                 square_y = 300
-#                 square_x = -100
-
-
+        for goon3000 in range(8):   #darkest squares
+            square_x += 200
+            pygame.draw.rect(screen, dark_square, ((square_x,square_y),(100,100)))
+            if square_x >= 700:
+                square_y = 300
+                square_x = -100
 
 
 
-#         for goon4000 in range(4):   #placeholder slots
-#             break
-#             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
 
 
-#         test_zombie.spawn_chance()
+        for goon4000 in range(4):   #placeholder slots
+            break
+            pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
 
-#         for zombie in test_zombie.zombies:
-#             zombie.move()
-#             zombie.draw()
+        if number >= 360:
+            test_zombie.spawn_chance()
+            number = 0
+            total_spawns +=1
+            time2 = time.time()
+            time3 = time2-total_time
+            print("time since last spawn:",time3-time4)
+            time4 = time3
 
 
-#         # TODO: Add your project code
+        for zombie in test_zombie.zombies:
+            zombie.move()
+            zombie.draw()
 
-#         pygame.display.update()
+        number += numex**2
+        numex += 0.00005
 
-# if __name__ == "__main__":
-#     main()
+        # TODO: Add your project code
+        pygame.display.update()
+
+if __name__ == "__main__":
+    main()
 
 
 
