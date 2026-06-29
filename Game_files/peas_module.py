@@ -166,6 +166,7 @@ def main():
             pea.move()
             pea.draw()
             pea.off_screen()
+
             
             wave.spawn_chance()
             for zombie in wave.zombies:
