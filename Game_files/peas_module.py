@@ -16,6 +16,10 @@ class Pea():
 
     def off_screen(self):
         return self.x > self.screen.get_width()
+    
+    def hit_zombie(self, pea):
+        hit_box = pygame.Rect(self.x, self.y, 20, 20 )
+        return hit_box.collidepoint(pea.x, pea.y)
 
 def main():
     poop = True
