@@ -13,7 +13,6 @@ class Pea():
 
     def draw(self):
         pygame.draw.circle(self.screen, "dark green", (self.x, self.y), 10)
-        print(self.x)
 
     def off_screen(self):
         return self.x > self.screen.get_width()
