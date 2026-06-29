@@ -1,6 +1,7 @@
 import pygame
 import sys, random, time
-import Button_module, peas_module, start_screen_module, Zombie_wave_module, money_module
+import Button_module, peas_module, start_screen_module, Zombie_wave_module, money_module, plant_cursor as plant_cursor_module, Plants_module
+
 
 def main():
     poop = True
@@ -48,6 +49,11 @@ def main():
     sun_counter = money_module.money(screen)
 
     clock = pygame.time.Clock()
+    all_plants = []
+    def plant_exists(row, col):
+        return any(p.row == row and p.column == col for p in all_plants)
+    
+    plant_cursor = plant_cursor_module.PlantCursor(screen)
 
     while True:
         
@@ -69,25 +75,41 @@ def main():
 #------------------------------button event code-----------------------------------------------------#    
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if sun_button.is_clicked_by(event.pos):
-                    # toggle sunflower placement preview
-                    if selected_plant_image is None and sunflower_preview is not None:
-                        selected_plant_image = sunflower_preview
-                        pygame.mouse.set_visible(False)
+                    plant_cursor.showing_plant = "sunflower"
+                elif pea_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "peashooter"
+                elif rep_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "gatling"
+                elif wall_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "wallnut"
+                elif cherry_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "cherrybomb"
+                elif plant_cursor.showing_plant != "":
+                    print(f"Placing {plant_cursor.showing_plant} at {event.pos}")
+                    
+                    mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
+                    row = mouse_pos_y // 100
+                    col = mouse_pos_x // 100
+                    # TODO: before appending, check whether a plant already exists at (row, col)
+                    if plant_exists(row, col):
+                        print("A plant is already at this location!")
                     else:
-                        selected_plant_image = None
-                        pygame.mouse.set_visible(True)
-
-                if pea_button.is_clicked_by(event.pos):
-                    print("PEA PEA PEA PEA PEA PEA PEA APE")
-
-                if rep_button.is_clicked_by(event.pos):
-                    print("PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PAE PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA PEA ")
-
-                if wall_button.is_clicked_by(event.pos):
-                    print("WALLNUT")
-
-                if cherry_button.is_clicked_by(event.pos):
-                    print("KABOOM")
+                        if plant_cursor.showing_plant == "sunflower":
+                            all_plants.append(Plants_module.Sunflower(screen, row, col))
+                        elif plant_cursor.showing_plant == "cherrybomb":
+                            all_plants.append(Plants_module.Cherrybomb(screen, row, col))
+                        elif plant_cursor.showing_plant == "peashooter":
+                            all_plants.append(Plants_module.Peashooter(screen, row, col))
+                        elif plant_cursor.showing_plant == "wallnut":
+                            all_plants.append(Plants_module.Wallnut(screen, row, col))
+                        elif plant_cursor.showing_plant == "gatling":
+                            all_plants.append(Plants_module.Gatling(screen, row, col))
+                        else:
+                            pygame.mouse.set_visible(True)
+                        plant_cursor.showing_plant = ""
+                    # TODO: if it does, skip placement and maybe print a warning or keep selection active
+                else:
+                    plant_cursor.showing_plant = ""
 
                 if start_button.is_clicked_by(event.pos):
                     if poop == True:
@@ -171,6 +193,9 @@ def main():
                 rep_button.border_color = "red"
 
     #------------------------------main draw-------------------------------------------#
+            for plants in all_plants:
+                plants.draw()
+            plant_cursor.draw()
             sun_button.draw()
             pea_button.draw()
             rep_button.draw()
@@ -178,7 +203,22 @@ def main():
             cherry_button.draw()
 
             sun_counter.draw()
-            
+            for plant in all_plants:
+                if isinstance(plant, Plants_module.Peashooter):
+                    plant.shoot()
+                    for bullet in list(plant.peas):
+                        bullet.move()
+                        bullet.draw()
+                        if bullet.off_screen():
+                            plant.peas.remove(bullet)
+                elif isinstance(plant, Plants_module.Gatling):
+                    plant.shoot()
+                    for bullet2 in list(plant.peas2):
+                        bullet2.move()
+                        bullet2.draw()
+                        if bullet2.off_screen():
+                            plant.peas2.remove(bullet2)
+
             wave.spawn_chance()
             for zombie in wave.zombies:
                 zombie.move()
