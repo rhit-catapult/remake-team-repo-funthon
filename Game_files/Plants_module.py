@@ -61,6 +61,18 @@ class Peashooter(Plant):
 class Gatling(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
         super().__init__(screen, row, column, 6, 0, 200, "assets/gatling_pea.png")
+        self.peas2 = []
+        self.pea_y2 = (row * 100) + 50 
+        self.pea_x2 = (column * 100) + 50
+        self.last_shot2 = 0
+        self.delay2 = 1250
+
+    def shoot(self):
+        current_time2 = pygame.time.get_ticks()
+        if current_time2 - self.last_shot2 >= self.delay2:
+            self.last_shot2 = current_time2
+            peaspawn2 = peas_module.Pea(self.screen, self.pea_x2,self.pea_y2)
+            self.peas2.append(peaspawn2)
         
 
 class Wallnut(Plant): 
@@ -227,9 +239,15 @@ def main():
             for bullet in spitty_mike.peas:
                 bullet.move()
                 bullet.draw()
-                # if bullet.off_screen:
-                #     spitty_mike.peas.remove(bullet)
+                if bullet.off_screen():
+                    spitty_mike.peas.remove(bullet)
             spitty_mike.draw()
+            super_spitty_mike.shoot()
+            for bullet2 in super_spitty_mike.peas2:
+                bullet2.move()
+                bullet2.draw()
+                if bullet2.off_screen():
+                    super_spitty_mike.peas2.remove(bullet2)
             super_spitty_mike.draw()
             dense_mike.draw()
             boom_mike.draw()

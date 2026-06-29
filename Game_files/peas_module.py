@@ -13,13 +13,10 @@ class Pea():
 
     def draw(self):
         pygame.draw.circle(self.screen, "dark green", (self.x, self.y), 10)
-        print(self.x, self.y)
+        print(self.x)
 
     def off_screen(self):
-        if self.x > self.screen.get_width():
-            print("IM OFF SCREEN")
-            self.x = 50
-            return True
+        return self.x > self.screen.get_width()
 
 def main():
     poop = True
