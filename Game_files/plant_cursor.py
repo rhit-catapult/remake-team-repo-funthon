@@ -65,7 +65,8 @@ def main():
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
 
     all_plants = []
-    # all_plants.append(Plants_module.Sunflower(screen, 0, 0))
+    def plant_exists(row, col):
+        return any(p.row == row and p.column == col for p in all_plants)
     
     plant_cursor = PlantCursor(screen)
     
@@ -98,20 +99,24 @@ def main():
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
                     row = mouse_pos_y // 100
                     col = mouse_pos_x // 100
-                    if plant_cursor.showing_plant == "sunflower":
-                       all_plants.append(Plants_module.Sunflower(screen, row, col))
-                    elif plant_cursor.showing_plant == "cherrybomb":
-                        all_plants.append(Plants_module.Cherrybomb(screen, row, col))
-                    elif plant_cursor.showing_plant == "peashooter":
-                        all_plants.append(Plants_module.Peashooter(screen, row, col))
-                    elif plant_cursor.showing_plant == "wallnut":
-                        all_plants.append(Plants_module.Wallnut(screen, row, col))
-                    elif plant_cursor.showing_plant == "gatling":
-                        all_plants.append(Plants_module.Gatling(screen, row, col))
-                        
+                    # TODO: before appending, check whether a plant already exists at (row, col)
+                    if plant_exists(row, col):
+                        print("A plant is already at this location!")
                     else:
-                        pygame.mouse.set_visible(True)
-                    plant_cursor.showing_plant = ""
+                        if plant_cursor.showing_plant == "sunflower":
+                            all_plants.append(Plants_module.Sunflower(screen, row, col))
+                        elif plant_cursor.showing_plant == "cherrybomb":
+                            all_plants.append(Plants_module.Cherrybomb(screen, row, col))
+                        elif plant_cursor.showing_plant == "peashooter":
+                            all_plants.append(Plants_module.Peashooter(screen, row, col))
+                        elif plant_cursor.showing_plant == "wallnut":
+                            all_plants.append(Plants_module.Wallnut(screen, row, col))
+                        elif plant_cursor.showing_plant == "gatling":
+                            all_plants.append(Plants_module.Gatling(screen, row, col))
+                        else:
+                            pygame.mouse.set_visible(True)
+                        plant_cursor.showing_plant = ""
+                    # TODO: if it does, skip placement and maybe print a warning or keep selection active
                 else:
                     plant_cursor.showing_plant = ""
 

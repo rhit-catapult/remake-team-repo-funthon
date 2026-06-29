@@ -13,13 +13,13 @@ class Pea():
 
     def draw(self):
         pygame.draw.circle(self.screen, "dark green", (self.x, self.y), 10)
-        print(self.x, self.y)
 
     def off_screen(self):
-        if self.x > self.screen.get_width():
-            print("IM OFF SCREEN")
-            self.x = 50
-            return True
+        return self.x > self.screen.get_width()
+    
+    def hit_zombie(self, pea):
+        hit_box = pygame.Rect(self.x, self.y, 20, 20 )
+        return hit_box.collidepoint(pea.x, pea.y)
 
 def main():
     poop = True
