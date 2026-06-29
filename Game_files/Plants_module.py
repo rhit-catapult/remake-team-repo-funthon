@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-import Button_module
+import Button_module, peas_module
 
 class Plant:
     def __init__(self, screen: pygame.Surface,row, column, health, damage, cost, image_filename):
@@ -45,10 +45,19 @@ class Sunflower(Plant):
 class Peashooter(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
         super().__init__(screen, row, column, 6, 0, 100, "assets/peashooter.png")
+        self.peas = []
+        self.pea_x = row * 100 - 50
+        self.pea_y = column * 100 - 50
+
+    def shoot(self):
+        peaspawn = peas_module.Pea(self.screen, self.pea_x,self.pea_y)
+        self.peas.append(peaspawn)
+        
 
 class Gatling(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
         super().__init__(screen, row, column, 6, 0, 200, "assets/gatling_pea.png")
+        
 
 class Wallnut(Plant): 
     def __init__(self, screen: pygame.Surface, row, column):

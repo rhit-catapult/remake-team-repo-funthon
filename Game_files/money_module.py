@@ -16,8 +16,10 @@ class money():
 
     def sun_change(self, sundif):
         self.sun += sundif
-        
 
+    def check_sun(self):
+        return self.sun
+    
     def natural_sun(self):
         current_time = pygame.time.get_ticks()
         if current_time - self.last_sun >= self.delay:
@@ -26,7 +28,8 @@ class money():
             
 
     def draw(self):
-         self.screen.blit(self.font.render(f"number: {self.sun}", True, (255,255,255), (120,60,40)),(50,575))
+         self.screen.blit(self.font.render(f"sun: {self.sun}", True, (255,255,255), (120,60,40)),
+                          (800,580))
             
 
 # def main():
