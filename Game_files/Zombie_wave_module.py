@@ -45,7 +45,11 @@ class Zombie_wave:
 
 
 def main():
+    time4 = 0
     number = 0
+    numex = 1
+    total_spawns = 0
+    total_time = time.time()
     pygame.init()
 
     pygame.display.set_caption("zombie test")
@@ -98,13 +102,22 @@ def main():
             break
             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
 
-        if number >= 180:
+        if number >= 360:
             test_zombie.spawn_chance()
+            number = 0
+            total_spawns +=1
+            time2 = time.time()
+            time3 = time2-total_time
+            print("time since last spawn:",time3-time4)
+            time4 = time3
+
+
         for zombie in test_zombie.zombies:
             zombie.move()
             zombie.draw()
 
-        number += 1
+        number += numex**2
+        numex += 0.00005
 
         # TODO: Add your project code
         pygame.display.update()
