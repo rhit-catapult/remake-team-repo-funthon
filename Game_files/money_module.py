@@ -28,7 +28,8 @@ class money():
             
 
     def draw(self):
-         self.screen.blit(self.font.render(f"number: {self.sun}", True, (255,255,255), (120,60,40)),(50,575))
+         self.screen.blit(self.font.render(f"sun: {self.sun}", True, (255,255,255), (120,60,40)),
+                          (800,580))
             
 
 # def main():

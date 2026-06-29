@@ -65,7 +65,8 @@ def main():
                     pygame.mixer.music.play()
                 except Exception:
                     pass
-    
+
+#------------------------------button event code-----------------------------------------------------#    
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if sun_button.is_clicked_by(event.pos):
                     # toggle sunflower placement preview
@@ -89,8 +90,14 @@ def main():
                     print("KABOOM")
 
                 if start_button.is_clicked_by(event.pos):
-                    poop = False
-                    fart = False
+                    if poop == True:
+                        poop = False
+                        fart = False
+
+                if end_button.is_clicked_by(event.pos):
+                    if fart == True:   
+                        fart = False
+                        wave.zombies.clear()
 
                     if music_available and not music_started:
                         try:
@@ -102,16 +109,14 @@ def main():
                             pass
                         music_started = True
                 
-                if end_button.is_clicked_by(event.pos):
-                    fart = False
-                    wave.zombies.clear()
+
 # ------------------------------------- background code ------------------------------------------------#
-        
-        
+    #---------------------start screen---------------------------------#        
         if poop == True:
             first_screen.draw_start()
             start_button.draw()
 
+    #--------------------main bg---------------------------------------#
         else:
             screen.fill((90,135,72))
             line_y = -50
@@ -138,25 +143,34 @@ def main():
                 if square_x >= 700:
                     square_y = 300
                     square_x = -100
-
+    #------------------------------------------------------------------------------------------------#
             sun_counter.natural_sun()
 
-
-    #----------------------------------draw code------------------------------------------------------------#
+#----------------------------------draw code------------------------------------------------------------#
+    #------------------------change color if you can afford----------------------#    
             if  sun_amount >= 50:
                 sun_button.border_color = "blue"
                 wall_button.border_color = "blue"
+            else:
+                sun_button.border_color = "red"
+                wall_button.border_color = "red"
 
             if sun_amount >= 100:
                 pea_button.border_color = "blue"
+            else:
+                pea_button.border_color = "red"
 
             if sun_amount >= 150:
                 cherry_button.border_color = "blue"
+            else:
+                cherry_button.border_color = "red"
                 
             if sun_amount >= 200:
                 rep_button.border_color = "blue"
+            else:
+                rep_button.border_color = "red"
 
-            
+    #------------------------------main draw-------------------------------------------#
             sun_button.draw()
             pea_button.draw()
             rep_button.draw()
@@ -173,11 +187,12 @@ def main():
                     if zombie.at_end() == True:
                         fart = True
                     wave.zombies.remove(zombie)
-            
+        #---------------------------------end screen-----------------------------------#
         if fart == True:
             end_screen.draw_end()
             end_button.draw()
             sun_counter.sun_reset()
+        #------------------------------------------------------------------------------#
 
         pygame.display.update()
 
