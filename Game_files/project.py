@@ -4,7 +4,7 @@ import Button_module, peas_module, start_screen_module, Zombie_wave_module, mone
 
 def main():
     poop = True
-    fart = False
+    fart = bool
     pygame.init()
     
     try:
@@ -85,6 +85,8 @@ def main():
 
                 if start_button.is_clicked_by(event.pos):
                     poop = False
+                    fart = False
+
                     if music_available and not music_started:
                         try:
                             pygame.mixer.music.set_volume(0.4)
@@ -132,6 +134,9 @@ def main():
                     square_y = 300
                     square_x = -100
 
+            sun_counter.natural_sun()
+
+
     #----------------------------------draw code------------------------------------------------------------#
             sun_button.draw()
             pea_button.draw()
@@ -140,7 +145,6 @@ def main():
             cherry_button.draw()
             sun_button.border_color = "blue"
 
-            sun_counter.natural_sun()
             sun_counter.draw()
             
             wave.spawn_chance()
@@ -155,6 +159,7 @@ def main():
         if fart == True:
             end_screen.draw_end()
             end_button.draw()
+            sun_counter.sun_reset()
 
         pygame.display.update()
 
