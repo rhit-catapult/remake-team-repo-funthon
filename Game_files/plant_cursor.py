@@ -65,11 +65,8 @@ def main():
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
 
     all_plants = []
-    # TODO: add a helper here to track occupied cells, e.g. occupied = set()
-    # TODO: use the occupied set or a plant_exists() helper to prevent placing two plants in the same row/col
     def plant_exists(row, col):
         return any(p.row == row and p.column == col for p in all_plants)
-    # all_plants.append(Plants_module.Sunflower(screen, 0, 0))
     
     plant_cursor = PlantCursor(screen)
     
