@@ -211,6 +211,13 @@ def main():
                         bullet.draw()
                         if bullet.off_screen():
                             plant.peas.remove(bullet)
+                        for zombie in wave.zombies:
+                            if zombie.hit_by(bullet):
+                                zombie.health -= 1
+                                print(zombie.health)
+                                if zombie.health == 0:
+                                    wave.zombies.remove(zombie)
+                                plant.peas.remove(bullet)
                 elif isinstance(plant, Plants_module.Gatling):
                     plant.shoot()
                     for bullet2 in list(plant.peas2):
