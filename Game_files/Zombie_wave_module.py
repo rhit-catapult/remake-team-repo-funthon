@@ -34,3 +34,8 @@ class Zombie_wave:
     def check(self):
         print(self.spawn_rate)
         return self.spawn_rate
+    
+    def remove_zombies(self):
+        for k in range (len(self.zombies)-1, -1, -1):
+            if self.zombies[k].need_kill:
+                self.zombies.remove(self.zombies[k])

@@ -99,6 +99,8 @@ def main():
                     col = mouse_pos_x // 100
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
+                    if row>= 5 or col >= 9:
+                        print("you cant plant there lil bro")
                     else:
                         if plant_cursor.showing_plant == "sunflower":
                             all_plants.append(Plants_module.Sunflower(screen, row, col))
@@ -246,6 +248,14 @@ def main():
                         plant.health -= zombie.damage/60
                         if plant.health <= 0:
                             all_plants.remove(plant)
+                    if isinstance(plant, Plants_module.Cherrybomb):
+                        if zombie.exploded(plant):
+                            print("huh")
+                            zombie.need_kill = True
+                            current_time = pygame.time.get_ticks()
+                            if current_time - 100 >= 1000:
+                                all_plants.remove(plant)
+                                
                 if not zombie.is_hitting_plant:
                     zombie.move()
                 zombie.draw()

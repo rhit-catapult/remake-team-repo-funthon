@@ -12,6 +12,7 @@ class Zombie_spawn:
         self.damage = 0
         self.speed = 0
         self.is_hitting_plant = False
+        self.need_kill = False
 
     
     def draw(self):
@@ -52,6 +53,15 @@ class Zombie_spawn:
         plant_hit_box = pygame.Rect(plant_x, plant_y, 100, 100)
         return zombie_hit_box.colliderect(plant_hit_box)
     
+    def exploded(self, plant):
+        zombie_hit_box = pygame.Rect(self.x, self.y, 25, 100)
+        plant_x, plant_y = plant.get_xy()
+        print(plant_x, plant_y)
+        plant_hit_box = pygame.Rect(plant_x - 100, plant_y - 100, 300, 300)
+        return zombie_hit_box.colliderect(plant_hit_box)
+
+
+
     def at_end(self):
         if self.x < -80:
             return True
