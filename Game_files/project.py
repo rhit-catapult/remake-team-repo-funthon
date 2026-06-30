@@ -79,16 +79,21 @@ def main():
 
 #------------------------------button event code-----------------------------------------------------#    
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if sun_button.is_clicked_by(event.pos):
+                if sun_button.is_clicked_by(event.pos) and sun_amount >= 50:
                     plant_cursor.showing_plant = "sunflower"
-                elif pea_button.is_clicked_by(event.pos):
+                    sun_counter.sun_change(-50)
+                elif pea_button.is_clicked_by(event.pos) and sun_amount >= 100:
                     plant_cursor.showing_plant = "peashooter"
-                elif rep_button.is_clicked_by(event.pos):
+                    sun_counter.sun_change(-100)
+                elif rep_button.is_clicked_by(event.pos) and sun_amount >= 200:
                     plant_cursor.showing_plant = "gatling"
-                elif wall_button.is_clicked_by(event.pos):
+                    sun_counter.sun_change(-200)
+                elif wall_button.is_clicked_by(event.pos) and sun_amount >= 50:
                     plant_cursor.showing_plant = "wallnut"
-                elif cherry_button.is_clicked_by(event.pos):
+                    sun_counter.sun_change(-50)
+                elif cherry_button.is_clicked_by(event.pos) and sun_amount >= 150:
                     plant_cursor.showing_plant = "cherrybomb"
+                    sun_counter.sun_change(-150)
                 elif plant_cursor.showing_plant != "":
                     print(f"Placing {plant_cursor.showing_plant} at {event.pos}")
                     
@@ -243,9 +248,7 @@ def main():
 
             if number >= 360:
                 number = 0
-                print(pp, numex)
                 wave.spawn_chance()
-
 
             for zombie in wave.zombies:
                 zombie.move()
@@ -268,4 +271,3 @@ def main():
         pygame.display.update()
 
 main()
-print(int(0.5))
