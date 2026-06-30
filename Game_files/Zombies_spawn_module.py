@@ -99,7 +99,7 @@ def main():
     first_screen = start_screen_module.start_screen(screen)
     end_screen = start_screen_module.start_screen(screen)
 
-    sun_counter = money_module.money(screen)
+    sun_counter = money_module.money.get_instance()
 
     clock = pygame.time.Clock()
     all_plants = []

@@ -27,6 +27,7 @@ def main():
 
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
+    money_module.money.shared_instance = money_module.money(screen)
 
     # load plant preview images
     try:
@@ -51,7 +52,7 @@ def main():
     first_screen = start_screen_module.start_screen(screen)
     end_screen = start_screen_module.start_screen(screen)
 
-    sun_counter = money_module.money(screen)
+    sun_counter = money_module.money.get_instance()
 
     clock = pygame.time.Clock()
     all_plants = []

@@ -11,7 +11,6 @@ class Plant:
         self.damage = damage
         self.cost = cost
         self.image:pygame.Surface = pygame.image.load(image_filename)
-        sunflower_thingy = money_module.money(screen)
 
     def draw(self):
         self.screen.blit(self.image, (self.column*100, self.row*100))
@@ -39,7 +38,7 @@ class Sunflower(Plant):
             self.image = self.images[self.image_index]
             self.last_switch_time = current_time
             if self.image_index == 1:
-                self.sunflowerthingy.sun_change(self, sundif=100)
+                money_module.money.get_instance().sun_change(100)
         super().draw()
 
 
@@ -135,7 +134,7 @@ def main():
     first_screen = start_screen_module.start_screen(screen)
     end_screen = start_screen_module.start_screen(screen)
 
-    sun_counter = money_module.money(screen)
+    sun_counter = money_module.money.get_instance()
 
     sunny_mike = Sunflower(screen, 0, 0)
     spitty_mike = Peashooter(screen, 1, 0)
