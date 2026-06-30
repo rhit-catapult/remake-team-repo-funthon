@@ -9,7 +9,7 @@ class Zombie_spawn:
         self.type = type
         self.health = health
         self.speed = 0
-        self.hit_box = pygame.Rect(self.x, self.y, 25, 100)
+
     
     def draw(self):
         if self.type == 0:
@@ -36,11 +36,11 @@ class Zombie_spawn:
         self.x -= self.speed/5
 
     def hit_by(self, pea):
-        return self.hit_box.collidepoint(pea.x, pea.y)
-    
+        hit_box = pygame.Rect(self.x, self.y, 25, 100)
+        return hit_box.collidepoint(pea.x, pea.y)
     def hit_plant(self, plant):
+        hit_box = pygame.Rect(self.column, self.row, 25, 100)
         return self.hit_box.collidepoint(plant.column * 100, plant.row * 100)
-        print()
     
     def at_end(self):
         if self.x < -80:
