@@ -11,6 +11,7 @@ class Plant:
         self.damage = damage
         self.cost = cost
         self.image:pygame.Surface = pygame.image.load(image_filename)
+        sunflower_thingy = money_module.money(screen)
 
     def draw(self):
         self.screen.blit(self.image, (self.column*100, self.row*100))
@@ -33,6 +34,8 @@ class Sunflower(Plant):
             self.image_index = (self.image_index + 1) % len(self.images)
             self.image = self.images[self.image_index]
             self.last_switch_time = current_time
+            if self.image_index == 1:
+                self.sunflowerthingy.sun_change(self, sundif=100)
         super().draw()
 
 
