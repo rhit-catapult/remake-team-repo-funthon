@@ -14,11 +14,6 @@ class Plant:
 
     def draw(self):
         self.screen.blit(self.image, (self.column*100, self.row*100))
-    
-        
-
-    def hit_by_zombie(self):
-        pass
 
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
