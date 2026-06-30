@@ -237,7 +237,7 @@ def main():
                     plant.remove_peas()
 
 
-            if number >= 360:
+            if number >= 540:
                 number = 0
                 wave.spawn_chance()
 
@@ -273,7 +273,7 @@ def main():
             sun_counter.sun_reset()
             all_plants.clear()
         #------------------------------------------------------------------------------#
-        numex += 0.0001
+        numex += 0.0002
         pp = 1.05**numex
         number += pp
         pygame.display.update()
