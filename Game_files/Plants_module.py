@@ -94,6 +94,18 @@ class Cherrybomb(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
         super().__init__(screen, row, column, None, 0, 150, "assets/cherrybomb.png")
 
+
+class Doomshroom(Plant):
+    def __init__(self, screen: pygame.Surface, row, column):
+        super().__init__(screen, row, column, None, 0, 150, "assets/doom shrrom.png")
+
+    def is_placed(self):
+        zombie = Zombie_wave_module.Zombie_wave(self.screen)
+        zombie.zombies.clear()
+
+
+
+
 def main():
     poop = True
     fart = bool

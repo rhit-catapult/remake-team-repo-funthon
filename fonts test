@@ -1,8 +1,10 @@
-# import pygame
-# pygame.init
+import pygame
+pygame.init
 # f = pygame.font.get_fonts()
 # print(f)
-print(int(0.5))
-print(int(0.51))
-print(int(0.49))
-print(int(0.9999))
+pygame.mixer.init()
+music = "Game_files/assets/freesound_community-fart-with-reverb-39675.mp3"
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.load(music)
+if 2 is 2:
+    pygame.mixer.music.play()
