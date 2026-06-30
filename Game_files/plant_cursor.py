@@ -76,6 +76,13 @@ def main():
     def plant_exists(row, col):
         return any(p.row == row and p.column == col for p in all_plants)
     
+    def remove_plant_at(row, col):
+        for k in range(len(all_plants) - 1, -1, -1):
+            if all_plants[k].row == row and all_plants[k].column == col:
+                del all_plants[k]
+                return True
+        return False
+
     def remove_plant(self):
         for k in range (len(self.all_plants)-1, -1, -1):
             if self.all_plants[k].need_gone:
@@ -109,7 +116,12 @@ def main():
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
                     row = mouse_pos_y // 100
                     col = mouse_pos_x // 100
-                    # TODO: before appending, check whether a plant already exists at (row, col)
+                   
+                    if plant_cursor.showing_plant == "shovel":
+                        if remove_plant_at(row,col):
+                            print(f"Removed plant at {row}, {col}")
+                        else:
+                            print("no plant to smash")
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
                     else:
@@ -126,7 +138,7 @@ def main():
                         else:
                             pygame.mouse.set_visible(True)
                         plant_cursor.showing_plant = ""
-                    # TODO: if it does, skip placement and maybe print a warning or keep selection active
+                    
                 else:
                     plant_cursor.showing_plant = ""
 

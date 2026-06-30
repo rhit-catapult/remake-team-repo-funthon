@@ -58,6 +58,13 @@ def main():
     def plant_exists(row, col):
         return any(p.row == row and p.column == col for p in all_plants)
     
+    def remove_plant_at(row, col):
+        for k in range(len(all_plants) - 1, -1, -1):
+            if all_plants[k].row == row and all_plants[k].column == col:
+                del all_plants[k]
+                return True
+        return False
+    
     plant_cursor = plant_cursor_module.PlantCursor(screen)
 
     while True:
@@ -100,6 +107,14 @@ def main():
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
                     row = mouse_pos_y // 100
                     col = mouse_pos_x // 100
+                    if plant_cursor.showing_plant == "shovel":
+                        if remove_plant_at(row,col):
+                            print(f"Removed plant at {row}, {col}")
+                        else:
+                            print("no plant to smash")
+                    else:
+                        pass
+                    
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
                     elif row>= 5 or col >= 9:
