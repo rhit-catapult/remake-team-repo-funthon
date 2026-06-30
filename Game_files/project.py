@@ -218,9 +218,10 @@ def main():
                                 print(zombie.health)
                                 if zombie.health == 0:
                                     wave.zombies.remove(zombie)
-                                plant.peas.remove(bullet)
-                        if bullet.off_screen() and bullet is not None:
-                            plant.peas.remove(bullet)
+                                bullet.need_gone = True
+                        if bullet.off_screen() and bullet in plant.peas:
+                            bullet.need_gone = True
+                    plant.remove_peas()
                 elif isinstance(plant, Plants_module.Gatling):
                     plant.shoot()
                     for bullet2 in list(plant.peas2):
@@ -232,9 +233,10 @@ def main():
                                 print(zombie.health)
                                 if zombie.health == 0:
                                     wave.zombies.remove(zombie)
-                                plant.peas2.remove(bullet2)
-                        if bullet2.off_screen() and bullet2 is not None:
-                            plant.peas2.remove(bullet2)
+                                bullet2.need_gone = True
+                        if bullet2.off_screen() and bullet2 in plant.peas2:
+                            bullet2.need_gone = True
+                    plant.remove_peas()
 
 
             if number >= 360:

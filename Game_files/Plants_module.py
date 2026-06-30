@@ -14,11 +14,6 @@ class Plant:
 
     def draw(self):
         self.screen.blit(self.image, (self.column*100, self.row*100))
-    
-        
-
-    def hit_by_zombie(self):
-        pass
 
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
@@ -57,6 +52,10 @@ class Peashooter(Plant):
             peaspawn = peas_module.Pea(self.screen, self.pea_x,self.pea_y)
             self.peas.append(peaspawn)
         
+    def remove_peas(self):
+        for k in range (len(self.peas)-1, -1, -1):
+            if self.peas[k].need_gone:
+                self.peas.remove(self.peas[k])
 
 class Gatling(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
@@ -73,6 +72,11 @@ class Gatling(Plant):
             self.last_shot2 = current_time2
             peaspawn2 = peas_module.Pea(self.screen, self.pea_x2,self.pea_y2)
             self.peas2.append(peaspawn2)
+        
+    def remove_peas(self):
+        for k in range (len(self.peas2)-1, -1, -1):
+            if self.peas2[k].need_gone:
+                self.peas2.remove(self.peas2[k])
         
 
 class Wallnut(Plant): 
