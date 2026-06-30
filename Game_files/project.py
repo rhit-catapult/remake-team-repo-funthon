@@ -251,7 +251,14 @@ def main():
                 wave.spawn_chance()
 
             for zombie in wave.zombies:
-                zombie.move()
+                for plant in all_plants:
+                    if zombie.hit_plant(plant):
+                        zombie.is_hitting_plant = True
+                        plant.health -= 1/60
+                        print(plant.health)
+                if not zombie.is_hitting_plant:
+                    zombie.move()
+                    zombie.is_hitting_plant = False
                 zombie.draw()
                 if zombie.at_end():
                     if zombie.at_end() == True:

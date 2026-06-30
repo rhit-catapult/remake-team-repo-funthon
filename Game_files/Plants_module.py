@@ -16,6 +16,10 @@ class Plant:
     def draw(self):
         self.screen.blit(self.image, (self.column*100, self.row*100))
 
+    def get_xy(self):
+        return self.column*100, self.row*100
+
+
 class Sunflower(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
         super().__init__(screen, row, column, 6, 0, 50, "assets/notsunnysunflower.png")
