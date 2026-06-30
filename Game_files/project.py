@@ -99,7 +99,7 @@ def main():
                     col = mouse_pos_x // 100
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
-                    if row>= 5 or col >= 9:
+                    elif row>= 5 or col >= 9:
                         print("you cant plant there lil bro")
                     else:
                         if plant_cursor.showing_plant == "sunflower":
