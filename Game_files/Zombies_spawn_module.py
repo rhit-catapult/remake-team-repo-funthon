@@ -9,6 +9,7 @@ class Zombie_spawn:
         self.y = row * 100
         self.type = type
         self.health = health
+        self.damage = 0
         self.speed = 0
         self.is_hitting_plant = False
 
@@ -17,21 +18,25 @@ class Zombie_spawn:
         if self.type == 0:
             #regular type zombie
             self.speed = 1
+            self.damage = 1
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.x, self.y))
             
         if self.type == 1:
             #bucket type zombie
             self.speed = 0.75
+            self.damage = 1
             self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.x, self.y))
 
         if self.type == 2:
             #runner type zombie
             self.speed = 5
+            self.damage = 1
             self.screen.blit(pygame.image.load("assets/runner.png"), (self.x, self.y))
 
         if self.type == 3:
             #hulk type zombie
             self.speed = 0.30
+            self.damage = 60
             self.screen.blit(pygame.image.load("assets/hulk.png"), (self.x, self.y))
 
     def move(self):

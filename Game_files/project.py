@@ -75,7 +75,6 @@ def main():
                     pygame.mixer.music.play()
                 except Exception:
                     pass
-
 #------------------------------button event code-----------------------------------------------------#    
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if sun_button.is_clicked_by(event.pos) and sun_amount >= 50:
@@ -94,12 +93,10 @@ def main():
                     plant_cursor.showing_plant = "cherrybomb"
                     sun_counter.sun_change(-150)
                 elif plant_cursor.showing_plant != "":
-                    print(f"Placing {plant_cursor.showing_plant} at {event.pos}")
                     
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
                     row = mouse_pos_y // 100
                     col = mouse_pos_x // 100
-                    # TODO: before appending, check whether a plant already exists at (row, col)
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
                     else:
@@ -116,7 +113,6 @@ def main():
                         else:
                             pygame.mouse.set_visible(True)
                         plant_cursor.showing_plant = ""
-                    # TODO: if it does, skip placement and maybe print a warning or keep selection active
                 else:
                     plant_cursor.showing_plant = ""
 
@@ -139,14 +135,10 @@ def main():
                         except Exception:
                             pass
                         music_started = True
-                
-
-# ------------------------------------- background code ------------------------------------------------#
     #---------------------start screen---------------------------------#        
         if poop == True:
             first_screen.draw_start()
             start_button.draw()
-
     #--------------------main bg---------------------------------------#
         else:
             screen.fill((90,135,72))
@@ -221,7 +213,6 @@ def main():
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet):
                                 zombie.health -= 1
-                                print(zombie.health)
                                 if zombie.health == 0:
                                     wave.zombies.remove(zombie)
                                 bullet.need_gone = True
@@ -236,7 +227,6 @@ def main():
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet2):
                                 zombie.health -= 1
-                                print(zombie.health)
                                 if zombie.health == 0:
                                     wave.zombies.remove(zombie)
                                 bullet2.need_gone = True
@@ -253,14 +243,13 @@ def main():
                 for plant in all_plants:
                     if zombie.hit_plant(plant):
                         zombie.is_hitting_plant = True
-                        plant.health -= 1/60
-                        print(plant.health)
+                        plant.health -= zombie.damage/60
                         if plant.health <= 0:
                             all_plants.remove(plant)
-                if zombie.is_hitting_plant:
+                if not zombie.is_hitting_plant:
                     zombie.move()
-                    zombie.is_hitting_plant = False
                 zombie.draw()
+                zombie.is_hitting_plant = False
                 if zombie.at_end():
                     if zombie.at_end() == True:
                         fart = True
