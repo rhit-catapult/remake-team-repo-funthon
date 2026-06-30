@@ -4,6 +4,8 @@ import Button_module, peas_module, start_screen_module, Zombie_wave_module, mone
 
 
 def main():
+    number = 0
+    numex = 1
     poop = True
     fart = bool
     number = 0
@@ -241,7 +243,7 @@ def main():
 
             if number >= 360:
                 number = 0
-                total_spawns += 1
+                print(pp, numex)
                 wave.spawn_chance()
 
 
@@ -253,8 +255,6 @@ def main():
                         fart = True
                     wave.zombies.remove(zombie)
 
-            number += numex**2
-            numex += 0.00005
             
         #---------------------------------end screen-----------------------------------#
         if fart == True:
@@ -262,7 +262,9 @@ def main():
             end_button.draw()
             sun_counter.sun_reset()
         #------------------------------------------------------------------------------#
-
+        numex += 0.0001
+        pp = 1.05**numex
+        number += pp
         pygame.display.update()
 
 main()
