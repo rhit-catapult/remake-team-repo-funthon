@@ -16,6 +16,7 @@ class PlantCursor:
         self.image_peashooter = pygame.image.load("assets/peashooter.png")
         self.image_walnut = pygame.image.load("assets/walnut.png")
         self.image_gatling_pea = pygame.image.load("assets/gatling_pea.png")
+        self.image_shovel = pygame.image.load("assets/shovel.png")
         self.showing_plant = ""
 
         
@@ -44,6 +45,11 @@ class PlantCursor:
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
             self.screen.blit(self.image_gatling_pea, (mouse_pos_x-50, mouse_pos_y-50))
+        elif self.showing_plant == "shovel":
+             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
+             pygame.mouse.set_visible(False)
+             self.screen.blit(self.image_shovel, (mouse_pos_x-50, mouse_pos_y-50))
+            
         else:
             pygame.mouse.set_visible(True)
         # if time.time() > self.last_hit_time + 1:
@@ -64,6 +70,7 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    shovel_button= Button_module.Button(screen, 115, 615, "shovel" )
 
     all_plants = []
     def plant_exists(row, col):
@@ -94,6 +101,8 @@ def main():
                     plant_cursor.showing_plant = "wallnut"
                 elif cherry_button.is_clicked_by(event.pos):
                     plant_cursor.showing_plant = "cherrybomb"
+                elif shovel_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "shovel"
                 elif plant_cursor.showing_plant != "":
                     print(f"Placing {plant_cursor.showing_plant} at {event.pos}")
                     
@@ -173,6 +182,7 @@ def main():
         rep_button.draw()
         wall_button.draw()
         cherry_button.draw()
+        shovel_button.draw()
         pygame.display.update()
 
 if __name__ == "__main__":

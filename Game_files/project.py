@@ -41,6 +41,7 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    shovel_button= Button_module.Button(screen, 115, 615, "Shovel" )
 
     start_button = Button_module.Button(screen, 500, 300, "play")
     start_button.border_color = "white"
@@ -92,6 +93,8 @@ def main():
                 elif cherry_button.is_clicked_by(event.pos) and sun_amount >= 150:
                     plant_cursor.showing_plant = "cherrybomb"
                     sun_counter.sun_change(-150)
+                elif shovel_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "shovel"
                 elif plant_cursor.showing_plant != "":
                     
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
@@ -112,6 +115,8 @@ def main():
                             all_plants.append(Plants_module.Wallnut(screen, row, col))
                         elif plant_cursor.showing_plant == "gatling":
                             all_plants.append(Plants_module.Gatling(screen, row, col))
+                        elif shovel_button.is_clicked_by(event.pos):
+                            plant_cursor.showing_plant = "shovel"
                         else:
                             pygame.mouse.set_visible(True)
                         plant_cursor.showing_plant = ""
@@ -204,7 +209,7 @@ def main():
             rep_button.draw()
             wall_button.draw()
             cherry_button.draw()
-
+            shovel_button.draw()
             sun_counter.draw()
             for plant in all_plants:
                 if isinstance(plant, Plants_module.Peashooter):
