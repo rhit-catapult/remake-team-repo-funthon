@@ -6,6 +6,9 @@ import Button_module, peas_module, start_screen_module, Zombie_wave_module, mone
 def main():
     poop = True
     fart = bool
+    number = 0
+    numex = 1
+    total_spawns = 0
     pygame.init()
     
     try:
@@ -209,8 +212,6 @@ def main():
                     for bullet in list(plant.peas):
                         bullet.move()
                         bullet.draw()
-                        if bullet.off_screen():
-                            plant.peas.remove(bullet)
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet):
                                 zombie.health -= 1
@@ -218,15 +219,30 @@ def main():
                                 if zombie.health == 0:
                                     wave.zombies.remove(zombie)
                                 plant.peas.remove(bullet)
+                        if bullet.off_screen() and bullet is not None:
+                            plant.peas.remove(bullet)
                 elif isinstance(plant, Plants_module.Gatling):
                     plant.shoot()
                     for bullet2 in list(plant.peas2):
                         bullet2.move()
                         bullet2.draw()
-                        if bullet2.off_screen():
+                        for zombie in wave.zombies:
+                            if zombie.hit_by(bullet2):
+                                zombie.health -= 1
+                                print(zombie.health)
+                                if zombie.health == 0:
+                                    wave.zombies.remove(zombie)
+                                plant.peas2.remove(bullet2)
+                        if bullet2.off_screen() and bullet2 is not None:
                             plant.peas2.remove(bullet2)
 
-            wave.spawn_chance()
+
+            if number >= 360:
+                number = 0
+                total_spawns += 1
+                wave.spawn_chance()
+
+
             for zombie in wave.zombies:
                 zombie.move()
                 zombie.draw()
@@ -234,6 +250,10 @@ def main():
                     if zombie.at_end() == True:
                         fart = True
                     wave.zombies.remove(zombie)
+
+            number += numex**2
+            numex += 0.00005
+            
         #---------------------------------end screen-----------------------------------#
         if fart == True:
             end_screen.draw_end()

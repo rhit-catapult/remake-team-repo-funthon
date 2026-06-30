@@ -20,16 +20,16 @@ class Zombie_wave:
         #if random.randint(0,100) == 1: #random.randint(elapsed_time ** 2, self.likely_hood) == self.likely_hood:
         self.random_chance = random.randint(0, 99)
         if self.random_chance <= 74:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0)
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0, 10)
             self.zombies.append(zombiespawn)
         if 74 < self.random_chance <= 89:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1)
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1, 28)
             self.zombies.append(zombiespawn)
         if 89 < self.random_chance <= 98:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2)
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2, 3)
             self.zombies.append(zombiespawn)
         if self.random_chance == 99:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3)
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3, 150)
             self.zombies.append(zombiespawn)
 
     def difficulty_increase(self):
@@ -44,86 +44,86 @@ class Zombie_wave:
         return self.spawn_rate
 
 
-def main():
-    time4 = 0
-    number = 0
-    numex = 1
-    total_spawns = 0
-    total_time = time.time()
-    pygame.init()
+# def main():
+#     time4 = 0
+#     number = 0
+#     numex = 1
+#     total_spawns = 0
+#     total_time = time.time()
+#     pygame.init()
 
-    pygame.display.set_caption("zombie test")
-    screen = pygame.display.set_mode((1000, 650))
+#     pygame.display.set_caption("zombie test")
+#     screen = pygame.display.set_mode((1000, 650))
 
-    clock = pygame.time.Clock()
+#     clock = pygame.time.Clock()
 
-    test_zombie = Zombie_wave(screen)
-    while True:
-        clock.tick(60)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+#     test_zombie = Zombie_wave(screen)
+#     while True:
+#         clock.tick(60)
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 sys.exit()
 
-            # TODO: Add you events code
+#             # TODO: Add you events code
 
 
-# ------------------------------------- background code ---------------------------------------------------------
-        screen.fill((90,135,72))
-        line_y = -50
-        line_x = -50
-        dark_line = (85, 128, 68)
-        dark_square = (77, 116, 62)
-        square_x = -100
-        square_y = 100
+# # ------------------------------------- background code ---------------------------------------------------------
+#         screen.fill((90,135,72))
+#         line_y = -50
+#         line_x = -50
+#         dark_line = (85, 128, 68)
+#         dark_square = (77, 116, 62)
+#         square_x = -100
+#         square_y = 100
 
-        for goon1000 in range(2):   #horizontal lines
-            line_y += 200
-            pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
+#         for goon1000 in range(2):   #horizontal lines
+#             line_y += 200
+#             pygame.draw.line(screen, dark_line, (0, line_y), (900, line_y), 100)
                
-        for goon2000 in range(4):   #vertical lines
-            line_x += 200
-            pygame.draw.line(screen, dark_line, (line_x, 0), (line_x, 500), 100)
+#         for goon2000 in range(4):   #vertical lines
+#             line_x += 200
+#             pygame.draw.line(screen, dark_line, (line_x, 0), (line_x, 500), 100)
 
-        pygame.draw.line(screen, (100,100,100), (950, 0), (950, 650), 100)  #sidewalk
-        pygame.draw.line(screen, (120,60,40), (0, 575), (1000, 575), 150)   #bottom bar
+#         pygame.draw.line(screen, (100,100,100), (950, 0), (950, 650), 100)  #sidewalk
+#         pygame.draw.line(screen, (120,60,40), (0, 575), (1000, 575), 150)   #bottom bar
 
-        for goon3000 in range(8):   #darkest squares
-            square_x += 200
-            pygame.draw.rect(screen, dark_square, ((square_x,square_y),(100,100)))
-            if square_x >= 700:
-                square_y = 300
-                square_x = -100
-
-
+#         for goon3000 in range(8):   #darkest squares
+#             square_x += 200
+#             pygame.draw.rect(screen, dark_square, ((square_x,square_y),(100,100)))
+#             if square_x >= 700:
+#                 square_y = 300
+#                 square_x = -100
 
 
 
-        for goon4000 in range(4):   #placeholder slots
-            break
-            pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
-
-        if number >= 360:
-            test_zombie.spawn_chance()
-            number = 0
-            total_spawns +=1
-            time2 = time.time()
-            time3 = time2-total_time
-            print("time since last spawn:",time3-time4)
-            time4 = time3
 
 
-        for zombie in test_zombie.zombies:
-            zombie.move()
-            zombie.draw()
+#         for goon4000 in range(4):   #placeholder slots
+#             break
+#             pygame.draw.rect(screen, (30,30,30), ((15,30), (100,100)))
 
-        number += numex**2
-        numex += 0.00005
+#         if number >= 360:
+#             test_zombie.spawn_chance()
+#             number = 0
+#             total_spawns +=1
+#             time2 = time.time()
+#             time3 = time2-total_time
+#             print("time since last spawn:",time3-time4)
+#             time4 = time3
 
-        # TODO: Add your project code
-        pygame.display.update()
 
-if __name__ == "__main__":
-    main()
+#         for zombie in test_zombie.zombies:
+#             zombie.move()
+#             zombie.draw()
+
+#         number += numex**2
+#         numex += 0.00005
+
+#         # TODO: Add your project code
+#         pygame.display.update()
+
+# if __name__ == "__main__":
+#     main()
 
 
 
