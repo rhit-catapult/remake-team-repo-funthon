@@ -17,6 +17,7 @@ class PlantCursor:
         self.image_walnut = pygame.image.load("assets/walnut.png")
         self.image_gatling_pea = pygame.image.load("assets/gatling_pea.png")
         self.showing_plant = ""
+
         
     def draw(self):
         """ Draws this sprite onto the screen. """
@@ -68,13 +69,13 @@ def main():
     def plant_exists(row, col):
         return any(p.row == row and p.column == col for p in all_plants)
     
+    def remove_plant(self):
+        for k in range (len(self.all_plants)-1, -1, -1):
+            if self.all_plants[k].need_gone:
+                self.all_plants.remove(self.all_plants[k])
+    
     plant_cursor = PlantCursor(screen)
     
-    # sunny_mike = Sunflower(screen, 0, 0)
-    # spitty_mike = Peashooter(screen, 1, 0)
-    # super_spitty_mike = Gatling(screen, 2, 0)
-    # dense_mike = Wallnut(screen, 3,0)
-    # boom_mike = Cherrybomb(screen, 4, 0)
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)

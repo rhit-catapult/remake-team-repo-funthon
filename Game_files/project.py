@@ -8,8 +8,6 @@ def main():
     numex = 1
     poop = True
     fart = bool
-    number = 0
-    numex = 1
     total_spawns = 0
     pygame.init()
     
@@ -257,7 +255,9 @@ def main():
                         zombie.is_hitting_plant = True
                         plant.health -= 1/60
                         print(plant.health)
-                if not zombie.is_hitting_plant:
+                        if plant.health <= 0:
+                            all_plants.remove(plant)
+                if zombie.is_hitting_plant:
                     zombie.move()
                     zombie.is_hitting_plant = False
                 zombie.draw()
