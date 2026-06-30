@@ -99,6 +99,8 @@ def main():
                     col = mouse_pos_x // 100
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
+                    if row >= 5 or col >= 9:
+                        print("You can't plant here")
                     else:
                         if plant_cursor.showing_plant == "sunflower":
                             all_plants.append(Plants_module.Sunflower(screen, row, col))
@@ -235,7 +237,7 @@ def main():
                     plant.remove_peas()
 
 
-            if number >= 360:
+            if number >= 540:
                 number = 0
                 wave.spawn_chance()
 
@@ -263,7 +265,7 @@ def main():
             sun_counter.sun_reset()
             all_plants.clear()
         #------------------------------------------------------------------------------#
-        numex += 0.0001
+        numex += 0.0002
         pp = 1.05**numex
         number += pp
         pygame.display.update()
