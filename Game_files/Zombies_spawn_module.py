@@ -56,7 +56,6 @@ class Zombie_spawn:
     def exploded(self, plant):
         zombie_hit_box = pygame.Rect(self.x, self.y, 25, 100)
         plant_x, plant_y = plant.get_xy()
-        print(plant_x, plant_y)
         plant_hit_box = pygame.Rect(plant_x - 100, plant_y - 100, 300, 300)
         return zombie_hit_box.colliderect(plant_hit_box)
 

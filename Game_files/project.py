@@ -216,7 +216,7 @@ def main():
                             if zombie.hit_by(bullet):
                                 zombie.health -= 1
                                 if zombie.health == 0:
-                                    wave.zombies.remove(zombie)
+                                    zombie.need_kill = True
                                 bullet.need_gone = True
                         if bullet.off_screen() and bullet in plant.peas:
                             bullet.need_gone = True
@@ -230,7 +230,7 @@ def main():
                             if zombie.hit_by(bullet2):
                                 zombie.health -= 1
                                 if zombie.health == 0:
-                                    wave.zombies.remove(zombie)
+                                    zombie.need_kill = True
                                 bullet2.need_gone = True
                         if bullet2.off_screen() and bullet2 in plant.peas2:
                             bullet2.need_gone = True
@@ -248,13 +248,7 @@ def main():
                         plant.health -= zombie.damage/60
                         if plant.health <= 0:
                             all_plants.remove(plant)
-                    if isinstance(plant, Plants_module.Cherrybomb):
-                        if zombie.exploded(plant):
-                            print("huh")
-                            zombie.need_kill = True
-                            current_time = pygame.time.get_ticks()
-                            if current_time - 100 >= 1000:
-                                all_plants.remove(plant)
+
                                 
                 if not zombie.is_hitting_plant:
                     zombie.move()
@@ -263,7 +257,18 @@ def main():
                 if zombie.at_end():
                     if zombie.at_end() == True:
                         fart = True
-                    wave.zombies.remove(zombie)
+                    zombie.need_kill = True
+
+        
+            for plant in all_plants:
+                if isinstance(plant, Plants_module.Cherrybomb):
+                    if time.time() >= plant.explosion_time:
+                        for zombie in wave.zombies:
+                            if zombie.exploded(plant):
+                                zombie.need_kill = True
+                        all_plants.remove(plant)
+            
+            wave.remove_zombies()
 
             
         #---------------------------------end screen-----------------------------------#
