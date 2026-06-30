@@ -12,7 +12,7 @@ class money():
 
     def __init__(self, screen):
         self.screen = screen
-        self.sun = 0
+        self.sun = 100000000
         self.last_sun = 0
         self.delay = 5000
         self.font = pygame.font.SysFont("arialrounded", 42)

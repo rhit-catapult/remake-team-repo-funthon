@@ -38,7 +38,7 @@ class Sunflower(Plant):
             self.image = self.images[self.image_index]
             self.last_switch_time = current_time
             if self.image_index == 1:
-                money_module.money.get_instance().sun_change(100)
+                money_module.money.get_instance().sun_change(25)
         super().draw()
 
 
