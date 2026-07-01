@@ -26,9 +26,9 @@ class Zombie_spawn:
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.x, self.y))
             
         if self.type == 1:
-            #bucket type zombie
+            #cone type zombie
             self.speed = 1.3 + add_speed
-            self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.x, self.y))
+            self.screen.blit(pygame.image.load("assets/cone head zombie.png"), (self.x, self.y))
 
         if self.type == 2:
             #runner type zombie
@@ -40,6 +40,11 @@ class Zombie_spawn:
             self.speed = 0.75 + add_speed
             self.damage = 60
             self.screen.blit(pygame.image.load("assets/hulk.png"), (self.x, self.y))
+
+        if self.type == 4:
+            #bucket type zombie
+            self.speed = 1.5 + add_speed
+            self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.x, self.y))
 
     def move(self):
         self.x -= self.speed/5
