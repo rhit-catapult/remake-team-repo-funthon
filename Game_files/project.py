@@ -7,6 +7,7 @@ def main():
     number = 0
     numex = 1
     more_speed = 0
+    juice = more_speed*5
     poop = True
     fart = bool
     total_spawns = 0
@@ -266,7 +267,7 @@ def main():
 
             if number >= 500:
                 number = 0
-                wave.spawn_chance()
+                wave.spawn_chance(juice)
 
             for zombie in wave.zombies:
                 for plant in all_plants:
