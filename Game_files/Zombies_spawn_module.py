@@ -53,7 +53,7 @@ class Zombie_spawn:
         if self.y != plant_y:
             return False
         else:
-            return self.x <= plant_x+ 100
+            return self.x <= plant_x+ 100 and self.x >= plant_x - 25
     
     def exploded(self, plant):
         zombie_hit_box = pygame.Rect(self.x, self.y, 25, 100)
