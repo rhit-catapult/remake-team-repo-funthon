@@ -250,7 +250,7 @@ def main():
                         bullet.draw()
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet):
-                                zombie.health -= 1
+                                zombie.health -= 1.5
                                 if zombie.health == 0:
                                     zombie.need_kill = True
                                 bullet.need_gone = True
@@ -264,7 +264,7 @@ def main():
                         bullet2.draw()
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet2):
-                                zombie.health -= 1
+                                zombie.health -= 1.5
                                 if zombie.health == 0:
                                     zombie.need_kill = True
                                 bullet2.need_gone = True
