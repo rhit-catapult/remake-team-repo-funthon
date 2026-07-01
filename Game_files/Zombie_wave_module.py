@@ -10,8 +10,8 @@ class Zombie_wave:
         self.spawn_rate = 1
         self.spawn_rate_increase = 2.01
 
-    def spawn_chance(self):
-        self.random_chance = random.randint(0, 99)
+    def spawn_chance(self, juice):
+        self.random_chance = random.randint(0 + juice, 70 + juice)
         if self.random_chance <= 74:
             zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0, 10)
             self.zombies.append(zombiespawn)
