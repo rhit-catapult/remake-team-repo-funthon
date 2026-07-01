@@ -299,6 +299,8 @@ def main():
             end_button.draw()
             sun_counter.sun_reset()
             all_plants.clear()
+            number = 0
+            numex = 1
         #------------------------------------------------------------------------------#
         numex += 0.01
         pp = 1.05**numex
