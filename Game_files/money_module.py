@@ -9,6 +9,12 @@ class money():
         self.last_sun = 0
         self.delay = 5000
         self.font = pygame.font.SysFont("arialrounded", 42)
+        shared_instance = None
+
+    @classmethod
+    def get_instance(cls):
+        return cls.shared_instance
+
 
     def sun_reset(self):
         self.sun = -25
