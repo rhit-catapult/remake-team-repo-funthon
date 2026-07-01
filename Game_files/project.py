@@ -97,9 +97,9 @@ def main():
                 elif wall_button.is_clicked_by(event.pos) and sun_amount >= 50:
                     plant_cursor.showing_plant = "wallnut"
                     sun_counter.sun_change(-50)
-                elif cherry_button.is_clicked_by(event.pos) and sun_amount >= 150:
+                elif cherry_button.is_clicked_by(event.pos) and sun_amount >= 500:
                     plant_cursor.showing_plant = "cherrybomb"
-                    sun_counter.sun_change(-150)
+                    sun_counter.sun_change(-500)
                 elif shovel_button.is_clicked_by(event.pos):
                     plant_cursor.showing_plant = "shovel"
                 elif plant_cursor.showing_plant != "":
@@ -205,7 +205,7 @@ def main():
             else:
                 pea_button.border_color = "red"
 
-            if sun_amount >= 150:
+            if sun_amount >= 500:
                 cherry_button.border_color = "blue"
             else:
                 cherry_button.border_color = "red"
@@ -257,7 +257,7 @@ def main():
                     plant.remove_peas()
 
 
-            if number >= 540:
+            if number >= 500:
                 number = 0
                 wave.spawn_chance()
 
@@ -285,7 +285,9 @@ def main():
                     if time.time() >= plant.explosion_time:
                         for zombie in wave.zombies:
                             if zombie.exploded(plant):
-                                zombie.need_kill = True
+                                zombie.health -= 50
+                                if zombie.health <= 0:
+                                    zombie.need_kill = True
                         all_plants.remove(plant)
             
             wave.remove_zombies()
@@ -298,9 +300,10 @@ def main():
             sun_counter.sun_reset()
             all_plants.clear()
         #------------------------------------------------------------------------------#
-        numex += 0.0002
+        numex += 0.01
         pp = 1.05**numex
         number += pp
+        # print(pp, numex)
         pygame.display.update()
 
 main()

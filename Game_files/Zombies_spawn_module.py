@@ -13,30 +13,35 @@ class Zombie_spawn:
         self.speed = 0
         self.is_hitting_plant = False
         self.need_kill = False
+        self.numex = 1
+
+        
+
 
     
     def draw(self):
+        self.numex += 0.005
+        self.pp = 1.05**self.numex
+        self.damage = self.pp
+        print(self.damage)
         if self.type == 0:
             #regular type zombie
-            self.speed = 1
-            self.damage = 1
+            self.speed = 1.25
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.x, self.y))
             
         if self.type == 1:
             #bucket type zombie
-            self.speed = 0.75
-            self.damage = 1
+            self.speed = 1
             self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.x, self.y))
 
         if self.type == 2:
             #runner type zombie
-            self.speed = 5
-            self.damage = 1
+            self.speed = 7.5
             self.screen.blit(pygame.image.load("assets/runner.png"), (self.x, self.y))
 
         if self.type == 3:
             #hulk type zombie
-            self.speed = 0.30
+            self.speed = 0.75
             self.damage = 60
             self.screen.blit(pygame.image.load("assets/hulk.png"), (self.x, self.y))
 

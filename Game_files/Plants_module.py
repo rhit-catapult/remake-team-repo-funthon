@@ -93,7 +93,7 @@ class Wallnut(Plant):
 class Cherrybomb(Plant):
     def __init__(self, screen: pygame.Surface, row, column):
         super().__init__(screen, row, column, 10000000, 0, 150, "assets/cherrybomb.png")
-        self.explosion_time = time.time() + 3
+        self.explosion_time = time.time() + 6
 
     def explode():
         pass
