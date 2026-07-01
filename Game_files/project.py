@@ -251,7 +251,7 @@ def main():
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet):
                                 zombie.health -= 1.5
-                                if zombie.health == 0:
+                                if zombie.health <= 0:
                                     zombie.need_kill = True
                                 bullet.need_gone = True
                         if bullet.off_screen() and bullet in plant.peas:
@@ -265,7 +265,7 @@ def main():
                         for zombie in wave.zombies:
                             if zombie.hit_by(bullet2):
                                 zombie.health -= 1.5
-                                if zombie.health == 0:
+                                if zombie.health <= 0:
                                     zombie.need_kill = True
                                 bullet2.need_gone = True
                         if bullet2.off_screen() and bullet2 in plant.peas2:
