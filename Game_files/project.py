@@ -1,16 +1,15 @@
 import pygame
 import sys, random, time
-import Button_module, peas_module, start_screen_module, Zombie_wave_module, money_module, plant_cursor as plant_cursor_module, Plants_module
+import Button_module, peas_module, start_screen_module, Zombie_wave_module, money_module, plant_cursor as plant_cursor_module, Plants_module, timer_module
 
 
 def main():
     number = 0
     numex = 1
     more_speed = 0
-    juice = more_speed*10
+    juice = 0
     poop = True
     fart = bool
-    total_spawns = 0
     pygame.init()
     
     try:
@@ -28,6 +27,7 @@ def main():
     pygame.display.set_caption("pvz")
     screen = pygame.display.set_mode((1000, 650))
     money_module.money.shared_instance = money_module.money(screen)
+    timer = timer_module.SurvivalTime(screen)
 
     # load plant preview images
     try:
@@ -73,7 +73,7 @@ def main():
     while True:
         
         clock.tick(60)
-        more_speed += 1/3000
+
 
         sun_amount = sun_counter.check_sun()
 
@@ -171,9 +171,12 @@ def main():
             number = 0
             numex = 1
             more_speed = 0
+            timer.start_round()
 
     #--------------------main bg---------------------------------------#
         else:
+            juice += 1/300
+            more_speed += 1/3000
             screen.fill((90,135,72))
             line_y = -50
             line_x = -50
@@ -269,7 +272,7 @@ def main():
                     plant.remove_peas()
 
 
-            if number >= 540:
+            if number >= 650:
                 number = 0
                 wave.spawn_chance(juice)
 
@@ -304,7 +307,6 @@ def main():
             
             wave.remove_zombies()
 
-            
         #---------------------------------end screen-----------------------------------#
         if fart == True:
             end_screen.draw_end()
@@ -315,8 +317,12 @@ def main():
             numex = 1
             more_speed = 0
 
+        else:
+            timer.update()
+        timer.draw()
+
         #------------------------------------------------------------------------------#
-        numex += 0.005
+        numex += 0.0005
         pp = 1.05**numex
         number += pp
         #print(pp, numex)
