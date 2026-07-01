@@ -41,6 +41,7 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    shovel_button= Button_module.Button(screen, 115, 615, "Shovel" )
 
     start_button = Button_module.Button(screen, 500, 300, "play")
     start_button.border_color = "white"
@@ -56,6 +57,13 @@ def main():
     all_plants = []
     def plant_exists(row, col):
         return any(p.row == row and p.column == col for p in all_plants)
+    
+    def remove_plant_at(row, col):
+        for k in range(len(all_plants) - 1, -1, -1):
+            if all_plants[k].row == row and all_plants[k].column == col:
+                del all_plants[k]
+                return True
+        return False
     
     plant_cursor = plant_cursor_module.PlantCursor(screen)
 
@@ -89,14 +97,24 @@ def main():
                 elif wall_button.is_clicked_by(event.pos) and sun_amount >= 50:
                     plant_cursor.showing_plant = "wallnut"
                     sun_counter.sun_change(-50)
-                elif cherry_button.is_clicked_by(event.pos) and sun_amount >= 150:
+                elif cherry_button.is_clicked_by(event.pos) and sun_amount >= 500:
                     plant_cursor.showing_plant = "cherrybomb"
-                    sun_counter.sun_change(-150)
+                    sun_counter.sun_change(-500)
+                elif shovel_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "shovel"
                 elif plant_cursor.showing_plant != "":
                     
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
                     row = mouse_pos_y // 100
                     col = mouse_pos_x // 100
+                    if plant_cursor.showing_plant == "shovel":
+                        if remove_plant_at(row,col):
+                            print(f"Removed plant at {row}, {col}")
+                        else:
+                            print("no plant to smash")
+                    else:
+                        pass
+                    
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
                     elif row>= 5 or col >= 9:
@@ -112,6 +130,8 @@ def main():
                             all_plants.append(Plants_module.Wallnut(screen, row, col))
                         elif plant_cursor.showing_plant == "gatling":
                             all_plants.append(Plants_module.Gatling(screen, row, col))
+                        elif shovel_button.is_clicked_by(event.pos):
+                            plant_cursor.showing_plant = "shovel"
                         else:
                             pygame.mouse.set_visible(True)
                         plant_cursor.showing_plant = ""
@@ -185,7 +205,7 @@ def main():
             else:
                 pea_button.border_color = "red"
 
-            if sun_amount >= 150:
+            if sun_amount >= 500:
                 cherry_button.border_color = "blue"
             else:
                 cherry_button.border_color = "red"
@@ -204,7 +224,7 @@ def main():
             rep_button.draw()
             wall_button.draw()
             cherry_button.draw()
-
+            shovel_button.draw()
             sun_counter.draw()
             for plant in all_plants:
                 if isinstance(plant, Plants_module.Peashooter):
@@ -237,7 +257,7 @@ def main():
                     plant.remove_peas()
 
 
-            if number >= 540:
+            if number >= 500:
                 number = 0
                 wave.spawn_chance()
 
@@ -265,7 +285,9 @@ def main():
                     if time.time() >= plant.explosion_time:
                         for zombie in wave.zombies:
                             if zombie.exploded(plant):
-                                zombie.need_kill = True
+                                zombie.health -= 50
+                                if zombie.health <= 0:
+                                    zombie.need_kill = True
                         all_plants.remove(plant)
             
             wave.remove_zombies()
@@ -277,10 +299,13 @@ def main():
             end_button.draw()
             sun_counter.sun_reset()
             all_plants.clear()
+            number = 0
+            numex = 1
         #------------------------------------------------------------------------------#
-        numex += 0.0002
+        numex += 0.01
         pp = 1.05**numex
         number += pp
+        # print(pp, numex)
         pygame.display.update()
 
 main()

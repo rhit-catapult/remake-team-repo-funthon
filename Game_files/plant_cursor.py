@@ -16,6 +16,7 @@ class PlantCursor:
         self.image_peashooter = pygame.image.load("assets/peashooter.png")
         self.image_walnut = pygame.image.load("assets/walnut.png")
         self.image_gatling_pea = pygame.image.load("assets/gatling_pea.png")
+        self.image_shovel = pygame.image.load("assets/shovel.png")
         self.showing_plant = ""
 
         
@@ -44,6 +45,11 @@ class PlantCursor:
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
             self.screen.blit(self.image_gatling_pea, (mouse_pos_x-50, mouse_pos_y-50))
+        elif self.showing_plant == "shovel":
+             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
+             pygame.mouse.set_visible(False)
+             self.screen.blit(self.image_shovel, (mouse_pos_x-50, mouse_pos_y-50))
+            
         else:
             pygame.mouse.set_visible(True)
         # if time.time() > self.last_hit_time + 1:
@@ -64,11 +70,19 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    shovel_button= Button_module.Button(screen, 115, 615, "shovel" )
 
     all_plants = []
     def plant_exists(row, col):
         return any(p.row == row and p.column == col for p in all_plants)
     
+    def remove_plant_at(row, col):
+        for k in range(len(all_plants) - 1, -1, -1):
+            if all_plants[k].row == row and all_plants[k].column == col:
+                del all_plants[k]
+                return True
+        return False
+
     def remove_plant(self):
         for k in range (len(self.all_plants)-1, -1, -1):
             if self.all_plants[k].need_gone:
@@ -94,13 +108,20 @@ def main():
                     plant_cursor.showing_plant = "wallnut"
                 elif cherry_button.is_clicked_by(event.pos):
                     plant_cursor.showing_plant = "cherrybomb"
+                elif shovel_button.is_clicked_by(event.pos):
+                    plant_cursor.showing_plant = "shovel"
                 elif plant_cursor.showing_plant != "":
                     print(f"Placing {plant_cursor.showing_plant} at {event.pos}")
                     
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
                     row = mouse_pos_y // 100
                     col = mouse_pos_x // 100
-                    # TODO: before appending, check whether a plant already exists at (row, col)
+                   
+                    if plant_cursor.showing_plant == "shovel":
+                        if remove_plant_at(row,col):
+                            print(f"Removed plant at {row}, {col}")
+                        else:
+                            print("no plant to smash")
                     if plant_exists(row, col):
                         print("A plant is already at this location!")
                     else:
@@ -117,7 +138,7 @@ def main():
                         else:
                             pygame.mouse.set_visible(True)
                         plant_cursor.showing_plant = ""
-                    # TODO: if it does, skip placement and maybe print a warning or keep selection active
+                    
                 else:
                     plant_cursor.showing_plant = ""
 
@@ -173,6 +194,7 @@ def main():
         rep_button.draw()
         wall_button.draw()
         cherry_button.draw()
+        shovel_button.draw()
         pygame.display.update()
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ class Zombie_wave:
             zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2, 3)
             self.zombies.append(zombiespawn)
         if self.random_chance == 99:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3, 150)
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3, 300)
             self.zombies.append(zombiespawn)
 
     def difficulty_increase(self):

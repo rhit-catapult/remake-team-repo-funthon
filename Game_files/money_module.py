@@ -5,7 +5,7 @@ import Zombies_spawn_module, Zombie_wave_module, Button_module
 class money():
     def __init__(self, screen):
         self.screen = screen
-        self.sun = 1000000000
+        self.sun = 0
         self.last_sun = 0
         self.delay = 5000
         self.font = pygame.font.SysFont("arialrounded", 42)
