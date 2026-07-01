@@ -3,13 +3,6 @@ import sys, random, time
 import Zombies_spawn_module, Zombie_wave_module, Button_module
 
 class money():
-
-    shared_instance = None
-
-    @classmethod
-    def get_instance(cls):
-        return cls.shared_instance
-
     def __init__(self, screen):
         self.screen = screen
         self.sun = 1000000000
