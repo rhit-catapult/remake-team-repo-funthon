@@ -11,22 +11,21 @@ class Zombie_wave:
         self.spawn_rate_increase = 2.01
 
     def spawn_chance(self, juice):
-        self.random_chance = random.uniform (0 + juice, 70 + juice)
-        print = ("self.random_chance")
+        self.random_chance = random.uniform (0 + juice, 60 + juice)
         if self.random_chance <= 50:
             zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 0, 10)
             self.zombies.append(zombiespawn)
-        if 50 < self.random_chance <= 74:
+        elif self.random_chance <= 55:
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2, 5)
+            self.zombies.append(zombiespawn)
+        elif self.random_chance <= 80:
             zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 1, 28)
             self.zombies.append(zombiespawn)
-        if 89 < self.random_chance <= 98:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 2, 3)
-            self.zombies.append(zombiespawn)
-        if self.random_chance == 99:
-            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3, 300)
-            self.zombies.append(zombiespawn)
-        if 74 < self.random_chance <= 89:
+        elif self.random_chance <= 100:
             zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 4, 65)
+            self.zombies.append(zombiespawn)
+        else:
+            zombiespawn = Zombies_spawn_module.Zombie_spawn(self.screen, random.randint(0,4), 3, 300)
             self.zombies.append(zombiespawn)
 
     def difficulty_increase(self):

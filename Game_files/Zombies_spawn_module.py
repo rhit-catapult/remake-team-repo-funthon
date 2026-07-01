@@ -1,6 +1,4 @@
-import pygame
-import sys, random, time
-import Button_module, peas_module, start_screen_module, Zombie_wave_module, money_module, plant_cursor as plant_cursor_module, Plants_module
+import pygame, random
 
 class Zombie_spawn:
     def __init__(self, screen:pygame.surface, row, type, health):
@@ -15,10 +13,6 @@ class Zombie_spawn:
         self.is_hitting_plant = False
         self.need_kill = False
 
-        
-
-
-    
     def draw(self, add_speed):
         if self.type == 0:
             #regular type zombie
@@ -65,8 +59,6 @@ class Zombie_spawn:
         plant_x, plant_y = plant.get_xy()
         plant_hit_box = pygame.Rect(plant_x - 100, plant_y - 100, 300, 300)
         return zombie_hit_box.colliderect(plant_hit_box)
-
-
 
     def at_end(self):
         if self.x < -80:

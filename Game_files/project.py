@@ -7,7 +7,7 @@ def main():
     number = 0
     numex = 1
     more_speed = 0
-    juice = 0
+
     poop = True
     fart = bool
     pygame.init()
@@ -172,10 +172,11 @@ def main():
             numex = 1
             more_speed = 0
             timer.start_round()
+            juice = 0
 
     #--------------------main bg---------------------------------------#
         else:
-            juice += 1/300
+            juice += 1/240
             more_speed += 1/3000
             screen.fill((90,135,72))
             line_y = -50
@@ -300,7 +301,7 @@ def main():
                     if time.time() >= plant.explosion_time:
                         for zombie in wave.zombies:
                             if zombie.exploded(plant):
-                                zombie.health -= 50
+                                zombie.health -= 150
                                 if zombie.health <= 0:
                                     zombie.need_kill = True
                         all_plants.remove(plant)
@@ -316,6 +317,7 @@ def main():
             number = 0
             numex = 1
             more_speed = 0
+            juice   = 0
 
         else:
             timer.update()
