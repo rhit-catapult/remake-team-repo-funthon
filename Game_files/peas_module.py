@@ -12,7 +12,7 @@ class Pea():
         self.x += self.speed
 
     def draw(self):
-        pygame.draw.circle(self.screen, "dark green", (self.x, self.y), 10)
+        pygame.draw.circle(self.screen,(140, 211, 18), (self.x, self.y), 10)
 
     def off_screen(self):
         return self.x > self.screen.get_width()
