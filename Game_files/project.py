@@ -6,6 +6,7 @@ import Button_module, peas_module, start_screen_module, Zombie_wave_module, mone
 def main():
     number = 0
     numex = 1
+    more_speed = 0
     poop = True
     fart = bool
     total_spawns = 0
@@ -70,6 +71,8 @@ def main():
     while True:
         
         clock.tick(60)
+        more_speed += 1/3000
+
         sun_amount = sun_counter.check_sun()
 
         for event in pygame.event.get():
@@ -161,6 +164,10 @@ def main():
         if poop == True:
             first_screen.draw_start()
             start_button.draw()
+            number = 0
+            numex = 1
+            more_speed = 0
+
     #--------------------main bg---------------------------------------#
         else:
             screen.fill((90,135,72))
@@ -272,7 +279,7 @@ def main():
                                 
                 if not zombie.is_hitting_plant:
                     zombie.move()
-                zombie.draw(0.05)
+                zombie.draw(more_speed)
                 zombie.is_hitting_plant = False
                 if zombie.at_end():
                     if zombie.at_end() == True:
@@ -301,11 +308,13 @@ def main():
             all_plants.clear()
             number = 0
             numex = 1
+            more_speed = 0
+
         #------------------------------------------------------------------------------#
         numex += 0.01
         pp = 1.05**numex
         number += pp
-        # print(pp, numex)
+        #print(pp, numex)
         pygame.display.update()
 
 main()
