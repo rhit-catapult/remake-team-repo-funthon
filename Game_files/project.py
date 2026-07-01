@@ -272,7 +272,7 @@ def main():
                                 
                 if not zombie.is_hitting_plant:
                     zombie.move()
-                zombie.draw()
+                zombie.draw(0.05)
                 zombie.is_hitting_plant = False
                 if zombie.at_end():
                     if zombie.at_end() == True:
