@@ -22,12 +22,12 @@ class Zombie_spawn:
     def draw(self, add_speed):
         if self.type == 0:
             #regular type zombie
-            self.speed = 1.75 + add_speed
+            self.speed = 1.5 + add_speed
             self.screen.blit(pygame.image.load("assets/zombie.png"), (self.x, self.y))
             
         if self.type == 1:
             #cone type zombie
-            self.speed = 1.3 + add_speed
+            self.speed = 1 + add_speed
             self.screen.blit(pygame.image.load("assets/cone head zombie.png"), (self.x, self.y))
 
         if self.type == 2:
@@ -43,7 +43,7 @@ class Zombie_spawn:
 
         if self.type == 4:
             #bucket type zombie
-            self.speed = 1.5 + add_speed
+            self.speed = 1.25 + add_speed
             self.screen.blit(pygame.image.load("assets/buckethead.png"), (self.x, self.y))
 
     def move(self):

@@ -7,7 +7,7 @@ def main():
     number = 0
     numex = 1
     more_speed = 0
-    juice = more_speed*5
+    juice = more_speed*10
     poop = True
     fart = bool
     total_spawns = 0
@@ -269,7 +269,7 @@ def main():
                     plant.remove_peas()
 
 
-            if number >= 500:
+            if number >= 540:
                 number = 0
                 wave.spawn_chance(juice)
 
