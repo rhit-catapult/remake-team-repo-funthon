@@ -43,6 +43,7 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
+    #doom_button = Button_module.Button(screen, 215, 615, "doom shroom")
     shovel_button= Button_module.Button(screen, 115, 615, "Shovel" )
 
     start_button = Button_module.Button(screen, 500, 300, "play")
@@ -106,6 +107,8 @@ def main():
                     sun_counter.sun_change(-500)
                 elif shovel_button.is_clicked_by(event.pos):
                     plant_cursor.showing_plant = "shovel"
+                # elif doom_button.is_clicked_by(event.pos):
+                #     plant_cursor.showing_plant = "doom shrrom"
                 elif plant_cursor.showing_plant != "":
                     
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
@@ -222,6 +225,7 @@ def main():
                 rep_button.border_color = "blue"
             else:
                 rep_button.border_color = "red"
+            shovel_button.border_color = "yellow"
 
     #------------------------------main draw-------------------------------------------#
             for plants in all_plants:
