@@ -43,7 +43,7 @@ def main():
     rep_button = Button_module.Button(screen, 500, 550, "repeater")
     wall_button = Button_module.Button(screen, 665, 550, "wallnut")
     cherry_button = Button_module.Button(screen, 850, 550, "cherry bomb")
-    #doom_button = Button_module.Button(screen, 215, 615, "doom shroom")
+    doom_button = Button_module.Button(screen, 315, 615, "doom shroom")
     shovel_button= Button_module.Button(screen, 115, 615, "Shovel" )
 
     start_button = Button_module.Button(screen, 500, 300, "play")
@@ -107,8 +107,9 @@ def main():
                     sun_counter.sun_change(-500)
                 elif shovel_button.is_clicked_by(event.pos):
                     plant_cursor.showing_plant = "shovel"
-                # elif doom_button.is_clicked_by(event.pos):
-                #     plant_cursor.showing_plant = "doom shrrom"
+                elif doom_button.is_clicked_by(event.pos) and sun_amount >= 2500:
+                    plant_cursor.showing_plant = "doom_shroom"
+                    sun_counter.sun_change(-2500)
                 elif plant_cursor.showing_plant != "":
                     
                     mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
@@ -137,6 +138,8 @@ def main():
                             all_plants.append(Plants_module.Wallnut(screen, row, col))
                         elif plant_cursor.showing_plant == "gatling":
                             all_plants.append(Plants_module.Gatling(screen, row, col))
+                        elif plant_cursor.showing_plant == "doom_shroom":
+                            all_plants.append(Plants_module.Doomshroom(screen, row, col))
                         elif shovel_button.is_clicked_by(event.pos):
                             plant_cursor.showing_plant = "shovel"
                         else:
@@ -154,7 +157,7 @@ def main():
                     if fart == True:   
                         fart = False
                         wave.zombies.clear()
-                    timer.start_round()
+                        timer.start_round()
 
                     if music_available and not music_started:
                         try:
@@ -230,6 +233,11 @@ def main():
                 rep_button.border_color = "blue"
             else:
                 rep_button.border_color = "red"
+            
+            if sun_amount >= 2500:
+                doom_button.border_color = "blue"
+            else:
+                doom_button.border_color = "red"
             shovel_button.border_color = "yellow"
 
     #------------------------------main draw-------------------------------------------#
@@ -241,6 +249,7 @@ def main():
             rep_button.draw()
             wall_button.draw()
             cherry_button.draw()
+            doom_button.draw()
             shovel_button.draw()
             sun_counter.draw()
             for plant in all_plants:
@@ -306,6 +315,10 @@ def main():
                                 if zombie.health <= 0:
                                     zombie.need_kill = True
                         all_plants.remove(plant)
+
+                if isinstance(plant, Plants_module.Doomshroom):
+                    wave.zombies.clear()
+                    all_plants.remove(plant)
             
             wave.remove_zombies()
 
