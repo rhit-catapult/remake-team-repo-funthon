@@ -11,6 +11,7 @@ class PlantCursor:
         self.image_peashooter = pygame.image.load("assets/peashooter.png")
         self.image_walnut = pygame.image.load("assets/walnut.png")
         self.image_gatling_pea = pygame.image.load("assets/gatling_pea.png")
+        self.image_doom_shroom = pygame.image.load("assets/doom shrrom.png")
         self.image_shovel = pygame.image.load("assets/shovel.png")
         self.showing_plant = ""
 
@@ -38,6 +39,10 @@ class PlantCursor:
             mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
             pygame.mouse.set_visible(False)
             self.screen.blit(self.image_gatling_pea, (mouse_pos_x-50, mouse_pos_y-50))
+        elif self.showing_plant == "doom_shroom":
+            mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
+            pygame.mouse.set_visible(False)
+            self.screen.blit(self.image_doom_shroom, (mouse_pos_x-50, mouse_pos_y-50))
         elif self.showing_plant == "shovel":
              mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
              pygame.mouse.set_visible(False)
