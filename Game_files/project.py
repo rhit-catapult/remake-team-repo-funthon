@@ -154,6 +154,7 @@ def main():
                     if fart == True:   
                         fart = False
                         wave.zombies.clear()
+                    timer.start_round()
 
                     if music_available and not music_started:
                         try:

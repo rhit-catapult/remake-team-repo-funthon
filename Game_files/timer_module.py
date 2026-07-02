@@ -17,3 +17,5 @@ class SurvivalTime:
 
     def update(self):
         self.delta = (pygame.time.get_ticks() - self.round_start_time)//1000
+    def restart():
+        pass

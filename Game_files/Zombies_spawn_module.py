@@ -32,7 +32,7 @@ class Zombie_spawn:
         if self.type == 3:
             #hulk type zombie
             self.speed = 0.75 + add_speed
-            self.damage = 60
+            self.damage = 10
             self.screen.blit(pygame.image.load("assets/hulk.png"), (self.x, self.y))
 
         if self.type == 4:
